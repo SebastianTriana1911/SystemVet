@@ -1,0 +1,6 @@
+Estas son las dependencias que necesita el proyecto para funcionar.
+Intalar con el comando pip install "Nombre de la dependencia"
+
+- pandas
+- matplotlib
+- numpy
