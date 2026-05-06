@@ -1,0 +1,23 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# --- VS Code ---
+.vscode/
+*.code-workspace
+
+# --- Datos y Reportes (Opcional) ---
+# Si quieres que el CSV final se comparta, no pongas esto. 
+# Pero si son pruebas locales, actívalo.
+*.log
+temp_data/
+
+# --- SO ---
+.DS_Store
+Thumbs.db
