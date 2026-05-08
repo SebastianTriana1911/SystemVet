@@ -3,6 +3,8 @@ Este archivo esta diseñado para manejar la vista del login y su logica, como va
 """
 
 from backend.usuarios import *
+from backend.registro import *
+from tkinter import messagebox
 import tkinter as tk
 
 # Configuracion de la ventana login 
@@ -36,9 +38,9 @@ class LoginVentana:
         # ---- CAMPOS DE ENTRADA DE TEXTO ----
         tk.Label(cuerpo, text="Usuario", bg="white", fg="black",
                 font=("Ahoroni", 10)).pack(anchor="w") # El mensaje Usuario ocupara todo el anchor
-        self.ent_user = tk.Entry(cuerpo, width=48, bd=1, relief="solid", # Campo de texto mantiene un borde solido con un grosor de 1 px
+        self.ent_nit = tk.Entry(cuerpo, width=48, bd=1, relief="solid", # Campo de texto mantiene un borde solido con un grosor de 1 px
                                 font=("Aharoni", 10))
-        self.ent_user.pack(pady=5, ipady=4) # Mantiene una distancia tanto de exterior como interior
+        self.ent_nit.pack(pady=5, ipady=4) # Mantiene una distancia tanto de exterior como interior
 
         tk.Label(cuerpo, text="Contraseña", bg="white", fg="black",
                 font=("Ahoroni", 10)).pack(anchor="w") # El mensaje Contraseña ocupara todo el anchor
@@ -56,9 +58,24 @@ class LoginVentana:
         # ----------------------------------------------
 
     def validar_acceso(self):
-        # Aquí irá la lógica para verificar en el JSON
-        print(f"Intentando entrar con: {self.ent_user.get()}")
+        # Le asignamos a las variables la informacion capturada en el Entry
+        nit_ingresado = self.ent_nit.get()
+        pass_ingresado = self.ent_pass.get()
 
-        
+        # Al instanciar un objeto de esta clase, ejecuta el archivo .json
+        validacion = GestionUsuarios()
+        exito, resultado, nombre_usuario = validacion.validar_login(nit_ingresado, pass_ingresado)
 
-
+        # Si el usuario ingresado coinside con la informacion guardada en el archivo .json se le muestra
+        # un mensaje de bienvenida y se ejecuta una nueva ventana segun el rol
+        if (exito):
+            messagebox.showinfo("Credenciales correctas", f"Bienvenido {nombre_usuario}.")
+            rol = resultado
+            # self.abrir_ventana_segun_rol(rol)
+        else:
+            messagebox.showerror("Credenciales incorrectas", resultado) # Mensaje de error
+            if resultado == "Contraseña incorrecta":
+                self.ent_pass.delete(0, tk.END) # Se borra la informacion del campo contraseña
+            else:
+                self.ent_nit.delete(0, tk.END) # Se borra la informacion del campo usuario
+                self.ent_pass.delete(0, tk.END) # Se borra la informacion del campo contraseña

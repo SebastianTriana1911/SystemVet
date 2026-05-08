@@ -1,0 +1,9 @@
+{
+    "1013107003": {
+        "nombre": "Sebastian",
+        "apellido" : "Triana",
+        "password": "12345",
+        "sexo": "Masculino",
+        "rol": "administrador"
+    }
+}

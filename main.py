@@ -1,5 +1,5 @@
 import tkinter as tk
-from view.login import LoginVentana
+from view.login import LoginVentana, GestionUsuarios
 
 def iniciar_app():
     ventana = tk.Tk()
