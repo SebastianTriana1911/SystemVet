@@ -1,31 +1,51 @@
 """ 
-El archivo usuarios.py esta diseñado para la logica de los roles en el sistema, al existir unicamente dos
-roles administrador y usuarios, se mantiene un orden utilizando POO utilizando clases que heredan de otras 
+Este archivo esta diseñado para mantener la logica de los usuarios que ingresan al sistema, los usuarios
+permitidos (Administrador, Medico) donde cada uno tienen sus atributos y metodos propios
 """
 
 # Clase principal Usuario
 class Usuario:
-    def __init__(self, username, password, nombre, apellido):
-        self.__username = username # Username es un atributo privado
-        self.__password = password # Password es un atributo privado
+    def __init__(self, username, password, nit, nombre, apellido, sexo):
+        # Atributos privados
+        self.__username = username
+        self.__password = password
+
+        # Atributos publicos
+        self.nit = nit
         self.nombre = nombre
         self.apellido = apellido
+        self.sexo = sexo # Se recibe como parametro Masculino o Femenino
+        self.estado = True
 
-    def validar_password(self, password):
-        return self.__password == password
+        if self.sexo == "Masculino":
+            self.foto_perfil = "image/foto_perfil_m.png"
+        else:
+            self.foto_perfil = "image/foto_perfil_f.png" 
 
+    # Metodos para acceder a los atributos privados
     def get_username(self):
         return self.__username
+    
+    def verificar_password(self, psw):
+        return self.__password == psw
+    
 
-# Clase Administrador, hereda los atributos y metodos de la clase Usuario
+# Clase Administrador que hereda de Usuarios
 class Administrador(Usuario):
-    def __init__(self, username, password, nombre, apellido):
-        super().__init__(username, password, nombre, apellido)
-        self.rol = "Admin"
+    def __init__(self, username, password, nit, nombre, apellido, sexo):
+        # Llamamos al constructor del padre
+        super().__init__(username, password, nit, nombre, apellido, sexo)
+        self.rol = "Administrador"
 
+
+# Clase Medico que hereda de Usuario
 class Medico(Usuario):
-    def __init__(self, username, password, nombre, apellido, nit, especialidad):
-        super().__init__(username, password, nombre, apellido)
-        self.nit = nit
+    def __init__(self, username, password, nit, nombre, apellido, sexo, especialidad):
+        super().__init__(username, password, nit, nombre, apellido, sexo)
         self.especialidad = especialidad
         self.rol = "Medico"
+        self.citas_asignadas = []
+
+    def puede_ser_eliminado(self):
+        # Retorna True si no tiene citas pendientes, False si tiene citas.
+        return len(self.citas_asignadas) == 0
