@@ -25,8 +25,8 @@ class GestionUsuarios:
             # Verificamos contraseña
             if datos_usuario["password"] == pass_ingresado:
                 # Retornamos si la validacion fue exitosa, el rol del usuario y el nombre
-                return True, datos_usuario["rol"], datos_usuario["nombre"] 
+                return True, datos_usuario["rol"], datos_usuario["nombre"], datos_usuario
             else:
-                return False, "Contraseña incorrecta", "null"
+                return False, "Contraseña incorrecta", "null", "null"
         else:
-            return False, "Usuario no encontrado en el sistema", "null"
+            return False, "Usuario no encontrado en el sistema", "null", "null"

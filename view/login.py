@@ -2,8 +2,8 @@
 Este archivo esta diseñado para manejar la vista del login y su logica, como validacion de usuario y contraseña
 """
 
-from backend.usuarios import *
 from backend.registro import *
+from view.indexAdmin import *
 from tkinter import messagebox
 import tkinter as tk
 
@@ -15,7 +15,7 @@ class LoginVentana:
         self.ventana.geometry("430x440+540+180") # Se inicializan la posicion y el tamaño de la ventana
         self.ventana.minsize(430,440) # Se maneja un minimo de px para la ventana
         self.ventana.maxsize(430,440) # Se maneja un maximo de px para la ventana
-        self.ventana.title("Sistema Veterinaria - Login") # Titulo de la ventana
+        self.ventana.title("Sistema Veterinario / Login") # Titulo de la ventana
         self.ventana.config(bg="white", bd=12) # El color de la ventana sera blanco
         # ----------------------------------------------------
 
@@ -50,7 +50,7 @@ class LoginVentana:
         # ------------------------------------
 
         # ---- BOTON PARA INGRESAR ----
-        self.btn_ingresar = tk.Button(cuerpo, text="INGRESAR", bg="#67b68a", fg="white", width=34, pady=5,
+        self.btn_ingresar = tk.Button(cuerpo, text="INGRESAR", bg="#61a781", fg="white", width=34, pady=5,
                                     font=("Aharoni", 12, "bold"), 
                                     command=self.validar_acceso) # Al hacer click, el boton llama al metodo
         self.btn_ingresar.pack(pady=20)
@@ -64,14 +64,23 @@ class LoginVentana:
 
         # Al instanciar un objeto de esta clase, ejecuta el archivo .json
         validacion = GestionUsuarios()
-        exito, resultado, nombre_usuario = validacion.validar_login(nit_ingresado, pass_ingresado)
+        exito, resultado, nombre_usuario, datos_usuario = validacion.validar_login(nit_ingresado, pass_ingresado)
 
         # Si el usuario ingresado coinside con la informacion guardada en el archivo .json se le muestra
         # un mensaje de bienvenida y se ejecuta una nueva ventana segun el rol
         if (exito):
-            messagebox.showinfo("Credenciales correctas", f"Bienvenido {nombre_usuario}.")
-            rol = resultado
-            # self.abrir_ventana_segun_rol(rol)
+            if (datos_usuario["sexo"] == "Masculino"):
+                messagebox.showinfo("Credenciales correctas", f"Bienvenido {nombre_usuario}.")
+            else:
+                messagebox.showinfo("Credenciales correctas", f"Bienvenida {nombre_usuario}.")
+
+            # Se valida el rol del usuario para identificar que vista se le mostrara
+            if resultado == "administrador":
+                self.ventana.destroy() # Se elimina la pantalla del login
+                ventana_index_admin = IndexVentanaAdmin(datos_usuario) # Se crea una nueva instancia para la vista siguiente
+                ventana_index_admin.mainloop() 
+            else:
+                pass # CODIGO PARA MEDICOS
         else:
             messagebox.showerror("Credenciales incorrectas", resultado) # Mensaje de error
             if resultado == "Contraseña incorrecta":

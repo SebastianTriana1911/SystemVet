@@ -15,10 +15,10 @@ class Usuario:
         self.sexo = sexo # Se recibe como parametro Masculino o Femenino
         self.estado = True
 
-        if self.sexo == "Masculino":
-            self.foto_perfil = "image/foto_perfil_m.png"
-        else:
-            self.foto_perfil = "image/foto_perfil_f.png" 
+        # if self.sexo == "Masculino":
+        #     self.foto_perfil = "image/foto_perfil_m.png"
+        # else:
+        #     self.foto_perfil = "image/foto_perfil_f.png" 
 
     # Metodos para acceder a los atributos privados
     def get_nit(self):
