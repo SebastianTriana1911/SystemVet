@@ -1,8 +1,8 @@
-import tkinter as tk
-from view.login import LoginVentana, GestionUsuarios
+import customtkinter as ctk # Customtkinter para usar metodos para diseños con Tkinter
+from view.login import LoginVentana
 
 def iniciar_app():
-    ventana = tk.Tk()
+    ventana = ctk.CTk() 
     app = LoginVentana(ventana)
 
     # Mantener la ventana abierta
@@ -11,3 +11,4 @@ def iniciar_app():
 if __name__ == "__main__":
     iniciar_app()
 
+ 
