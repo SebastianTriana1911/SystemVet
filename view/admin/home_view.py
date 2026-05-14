@@ -182,7 +182,7 @@ class HomeVentana():
 
         self.imageReporte = tk.PhotoImage(file="image/reporte.png")
         tk.Label(opcion_reporte, bg="#1a1a1f", image=self.imageReporte,
-                 width=72, height=72).pack()
+                 width=62, height=70).pack()
 
         tk.Label(opcion_reporte, text="Reportes", bg="#1a1a1f", fg="white",
                  font=("Segoe UI", 13, "bold")).pack(pady=(10, 0))
