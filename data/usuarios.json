@@ -2,9 +2,9 @@
     "1": {
         "nombre": "Sebastian",
         "apellido" : "Triana",
-        "password": "1",
         "sexo": "Masculino",
-        "rol": "administrador"
+        "rol": "administrador",
+        "password": "1"
     },
 
     "2": {
