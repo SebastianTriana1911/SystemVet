@@ -1,0 +1,18 @@
+{
+    "1": {
+        "nombre": "Sebastian",
+        "apellido" : "Triana",
+        "password": "1",
+        "sexo": "Masculino",
+        "rol": "administrador"
+    },
+
+    "2": {
+        "nombre": "Ana",
+        "apellido" : "Gomez",
+        "password": "2",
+        "sexo": "Femenino",
+        "rol": "administrador"
+    }
+    
+}
