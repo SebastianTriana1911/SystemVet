@@ -274,31 +274,31 @@ class GestionAdminVentana:
 
 
 
-    def cargar_datos_tabla(self):
-        # 1. Obtener el diccionario (NIT como llave)
-        data = LoginController.obtener_usuarios()
+    # def cargar_datos_tabla(self):
+    #     # 1. Obtener el diccionario (NIT como llave)
+    #     data = LoginController.obtener_usuarios()
         
-        # 2. Limpiar la tabla para evitar duplicados
-        for row in self.vista.tabla.get_children():
-            self.vista.tabla.delete(row)
+    #     # 2. Limpiar la tabla para evitar duplicados
+    #     for row in self.vista.tabla.get_children():
+    #         self.vista.tabla.delete(row)
     
-        # 3. Validar si data tiene contenido
-        if not data:
-            print("DEBUG: El diccionario 'data' está vacío.")
-            return
+    #     # 3. Validar si data tiene contenido
+    #     if not data:
+    #         print("DEBUG: El diccionario 'data' está vacío.")
+    #         return
     
-        # 4. Iterar usando el NIT como llave primaria
-        for nit, info in data.items():
-            # Limpiamos el valor del rol para comparar correctamente
-            rol_usuario = str(info.get('rol', '')).strip().lower()
+    #     # 4. Iterar usando el NIT como llave primaria
+    #     for nit, info in data.items():
+    #         # Limpiamos el valor del rol para comparar correctamente
+    #         rol_usuario = str(info.get('rol', '')).strip().lower()
             
-            if rol_usuario == 'administrador':
-                self.vista.tabla.insert("", "end", values=(
-                    nit,                           # Nuestra Llave Primaria
-                    info.get('nombre', 'N/A'),
-                    info.get('apellido', 'N/A'),
-                    info.get('sexo', 'N/A'),
-                    info.get('telefono', 'N/A'),
-                    "********",                    # No mostramos la clave
-                    "  ✎ Modificar  |  🗑 Borrar  "
-                ))
+    #         if rol_usuario == 'administrador':
+    #             self.vista.tabla.insert("", "end", values=(
+    #                 nit,                           # Nuestra Llave Primaria
+    #                 info.get('nombre', 'N/A'),
+    #                 info.get('apellido', 'N/A'),
+    #                 info.get('sexo', 'N/A'),
+    #                 info.get('telefono', 'N/A'),
+    #                 "********",                    # No mostramos la clave
+    #                 "  ✎ Modificar  |  🗑 Borrar  "
+    #             ))
