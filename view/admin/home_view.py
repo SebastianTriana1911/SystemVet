@@ -1,6 +1,7 @@
 import tkinter as tk
+from backend.admin.home_controller import *
 
-class IndexVentanaAdmin():
+class HomeVentana():
     def __init__(self, datos_usuario):
         self.datos_usuario = datos_usuario
 
@@ -73,7 +74,8 @@ class IndexVentanaAdmin():
                                         width=100,              # Ancho fijo para hacerlo cuadrado
                                         height=100,             # Alto fijo
                                         borderwidth=0,
-                                        pady=8
+                                        pady=8,
+                                        command=lambda:HomeController(self.ventana, datos_usuario)
                                         )
         btn_administrador.grid(row=0, column=0, ipadx=5, ipady=5)
 

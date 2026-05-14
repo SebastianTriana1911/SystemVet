@@ -5,7 +5,7 @@ import customtkinter as ctk
 
 from tkinter import messagebox
 from backend.login_controller import *
-from view.indexAdmin import *
+from view.admin.home_view import *
 
 
 # Configuracion de la ventana login 
@@ -18,21 +18,21 @@ class LoginVentana:
         self.ventana = ventana 
         
         # Tamaño definido de la ventana
-        ancho_ventana = 460
-        alto_ventana = 490
+        # ancho_ventana = 460
+        # alto_ventana = 490
 
-        # Se obtiene el ancho y alto de la pantalla del usuario
-        ancho_pantalla = self.ventana.winfo_screenwidth()
-        alto_pantalla = self.ventana.winfo_screenheight()
+        # # Se obtiene el ancho y alto de la pantalla del usuario
+        # ancho_pantalla = self.ventana.winfo_screenwidth()
+        # alto_pantalla = self.ventana.winfo_screenheight()
 
-        # Se calcular la posición de la pantalla para que la ventana quede en el centro
-        x = (ancho_pantalla // 2) - (ancho_ventana // 2)
-        y = (alto_pantalla // 2) - (alto_ventana // 2)
-        self.ventana.geometry(f"{ancho_ventana}x{alto_ventana}+{x}+{y}")
+        # # Se calcular la posición de la pantalla para que la ventana quede en el centro
+        # x = (ancho_pantalla // 2) - (ancho_ventana // 2)
+        # y = (alto_pantalla // 2) - (alto_ventana // 2)
+        # self.ventana.geometry(f"{ancho_ventana}x{alto_ventana}+{x}+{y}")
 
         # Se maneja un minimo de px para la ventana lo que permite que esta no se pueda ampliar
-        self.ventana.minsize(460,490) 
-        self.ventana.maxsize(460,490) 
+        # self.ventana.minsize(460,490) 
+        # self.ventana.maxsize(460,490) 
 
         # Este metodo permite modificar el color de la barra de la ventana 
         ctk.set_appearance_mode("dark")
@@ -142,7 +142,8 @@ class LoginVentana:
                                               pady=4,
                                               borderwidth=3, # Estilo de boton
                                                font=("Segoe UI", 10, "bold"), 
-                                                command=self.validar_acceso)
+                                                cursor="hand2", # Cambia el cursor al pasar por encima
+                                                 command=self.validar_acceso)
         
         # Vincular eventos y llama de manera anonima metodos de clase
         self.btn_ingresar.bind("<Enter>", lambda e: LoginController.on_enter(e))
@@ -178,8 +179,8 @@ class LoginVentana:
             # Se valida el rol del usuario para identificar que vista se le mostrara
             if resultado == "administrador":
                 self.ventana.destroy() # Se elimina la pantalla del login
-                ventana_index_admin = IndexVentanaAdmin(datos_usuario) # Se crea una nueva instancia para la vista siguiente
-                ventana_index_admin.mainloop() 
+                ventana_home_admin = HomeVentana(datos_usuario) # Se crea una nueva instancia para la vista siguiente
+                ventana_home_admin.mainloop() 
             else:
                 pass # CODIGO PARA MEDICOS
         else:

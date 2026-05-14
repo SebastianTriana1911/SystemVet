@@ -4,12 +4,13 @@ permitidos (Administrador, Medico) donde cada uno tienen sus atributos y metodos
 """
 # Clase principal Usuario
 class Usuario:
-    def __init__(self, nit, password, nombre, apellido, sexo):
+    def __init__(self, nit, password, nombre, apellido, sexo, telefono):
         # Atributos privados
         self.__nit = nit
         self.__password = password
 
         # Atributos publicos
+        self.telefono = telefono
         self.nombre = nombre
         self.apellido = apellido
         self.sexo = sexo # Se recibe como parametro Masculino o Femenino
@@ -30,16 +31,16 @@ class Usuario:
 
 # Clase Administrador que hereda de Usuarios
 class Administrador(Usuario):
-    def __init__(self, nit, password, nombre, apellido, sexo):
+    def __init__(self, nit, password, nombre, apellido, sexo, telefono):
         # Llamamos al constructor del padre
-        super().__init__(nit, password, nombre, apellido, sexo)
+        super().__init__(nit, password, nombre, apellido, sexo, telefono)
         self.rol = "Administrador"
 
 
 # Clase Medico que hereda de Usuario
 class Medico(Usuario):
-    def __init__(self, nit, password,nombre, apellido, sexo, especialidad):
-        super().__init__(nit, password, nombre, apellido, sexo)
+    def __init__(self, nit, password,nombre, apellido, sexo, telefono, especialidad):
+        super().__init__(nit, password, nombre, apellido, sexo, telefono,)
         self.especialidad = especialidad
         self.rol = "Medico"
         self.citas_asignadas = []
