@@ -1,4 +1,7 @@
+
 import tkinter as tk
+import customtkinter as ctk
+from backend.admin.gestion_admin_controller import *
 from backend.admin.home_controller import *
 
 class HomeVentana():
@@ -6,148 +9,200 @@ class HomeVentana():
         self.datos_usuario = datos_usuario
 
         # ----------- CONFIGURACION DE LA VENTANA -----------
-        self.ventana = tk.Tk()
-        self.ventana.geometry("620x460+470+160") # Se inicializan la posicion y el tamaño de la ventana
-        self.ventana.minsize(620,460) # Se maneja un minimo de px para la ventana
-        self.ventana.maxsize(620,460) # Se maneja un maximo de px para la ventana
-        self.ventana.title("SystemVet / Home Administrador") # Titulo de la self.ventana
-        self.ventana.config(bg="white", bd=12) # El color de la ventana sera blanco
+        self.ventana = ctk.CTk()
+        ctk.set_appearance_mode("dark")
+        self.ventana.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
+        self.ventana.title("SystemVet / Gestión de Administradores")
+        self.ventana.configure(bg="black", bd=10)
         # ----------------------------------------------------
 
-        # ----------- CONFIGURACION DEL ENCABEZADO ----------- 
-        header = tk.Frame(self.ventana, bg="#2b8ee6")
-        header.pack(side="top", fill="x") # Se muestra en la ventana
-   
+        # ----------- CONFIGURACION DEL ENCABEZADO -----------
+        self.header = tk.Frame(self.ventana,
+                                bg="#6745B8",)
+        self.header.pack(side="top",
+                          fill="x") # Mantiene el 100% del ancho en la pantalla
+        
+        self.image_logo = tk.PhotoImage(file="image/logotipo.png").subsample(2, 2) # Acceder a la imagen
+        image_logo = self.image_logo
+        image_logo = tk.Label(self.header,
+                                  bg="#6745B8",
+                                  width=70,
+                                  height=70,
+                                    image=self.image_logo)
+        image_logo.image = self.image_logo
+        image_logo.pack(side="left", padx=20, pady=10)
+
+        tk.Label(self.header,
+                  text="GESTIÓN DE ADMINISTRADORES",
+                    fg="white", 
+                     bg="#6745B8", 
+                      font=("Segoe UI", 15, "bold")).pack(side="left")
+        
+
         if datos_usuario["sexo"] == "Masculino":
             avatar = "image/avatar_masculino.png"
         else:
             avatar = "image/avatar_femenino.png"
 
-        # Cargar la imagen original
-        img_original = tk.PhotoImage(file=avatar)
-
-        # Redimensionar usando subsample
-        self.imageAvatar = img_original.subsample(3, 3) 
+        # Cargar la imagen original y redimensionar usando subsample
+        img_original = tk.PhotoImage(file=avatar) 
+        self.image_avatar = img_original.subsample(2, 2)
 
         # El Label debe coincidir con el tamaño resultante
-        imageAvatar = tk.Label(header, bg="#2b8ee6", image=self.imageAvatar, width=32, height=32)
-        imageAvatar.pack(side="right", padx=(10, 10))
+        image_avatar = tk.Label(self.header,
+                                 bg="#6745B8", 
+                                  image=self.image_avatar,)
+        image_avatar.image = self.image_avatar
+        image_avatar.pack(side="right", padx=(0,20))
 
-        tk.Label(header, text=f"{datos_usuario["nombre"]} | Admin", bg="#2b8ee6", fg="white", 
-                font=("Aharoni", 14, "bold"), pady=15).pack(side="right")
+        # Este contenedor permitira acomodar dos Label arriba y abajo
+        self.container_usuario = tk.Frame(self.header,
+                                           bg="#6745B8")
+        self.container_usuario.pack(side="right", padx=20)
         
-        tk.Label(header, text="SystemVet", bg="#2b8ee6", fg="white", 
-                font=("Aharoni", 14, "bold"), ).pack(side="left", padx=(10,10))
+        # Etiqueta "Administrador" parte superior
+        if datos_usuario["sexo"] == "Masculino":
+            tk.Label(self.container_usuario,
+                     text="Administrador",
+                      bg="#6745B8",
+                      fg="white",
+                       font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
+        else:
+            tk.Label(self.container_usuario,
+                     text="Administradora",
+                      bg="#6745B8",
+                      fg="white",
+                       font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
+        
+        # Contenedor que organiza el nombre del usuario y el boton de manera horizontal
+        self.fila_nombre = tk.Frame(self.container_usuario,
+                                     bg="#6745B8")
+        self.fila_nombre.pack(side="top", anchor="e")
+        
+        # Nombre del usuario en la parte izquierda
+        tk.Label(self.fila_nombre,
+                   text=f"{datos_usuario['nombre']} {datos_usuario["apellido"]}    | ",
+                    bg="#6745B8",
+                     fg="white", 
+                      font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
+        
+        # Botón Cerrar Sesión (Al lado del nombre)
+        self.btn_cerrar_sesion = tk.Button(self.fila_nombre, 
+                                            text="Cerrar sesión", 
+                                             bg="#6745B8", 
+                                                fg="white",
+                                                 font=("Segoe UI", 12, "bold"),                                                  
+                                                  borderwidth=0,
+                                                   cursor="hand2",
+                                                    command= lambda:GestionAdminController.cerrar_sesion(self.ventana) # Cambia el cursor al pasar por encima
+                                           )
+        self.btn_cerrar_sesion.pack(side="left")
         # ----------------------------------------------------
 
-        # ------------- CONFIGURACION DEL CUERPO ------------- 
-        cuerpo = tk.Frame(self.ventana, bg="white")
-        cuerpo.pack(fill="both", expand=True) # El cuerpo es "infinito" hacia abajo
+        # ------------- CONFIGURACION DEL CUERPO -------------
+        cuerpo = tk.Frame(self.ventana, bg="#242424")
+        cuerpo.pack(fill="both", expand=True, padx=55, pady=30)
 
-        # --- CONFIGURACION TITULO ---
-        tk.Label(cuerpo, text="Escritorio", bg="white", fg="black", 
-                 font=("Aharoni", 14, "bold")).pack(side="top", anchor="w", padx=10, pady=(15, 0))
+        tk.Label(cuerpo, text="Gestión de información", bg="#242424", fg="white",
+                 font=("Segoe UI", 20, "bold")).pack(anchor="w")
 
-        linea = tk.Frame(cuerpo, bg="#e1e1e1", height=2)
-        linea.pack(fill="x", padx=10, pady=(5, 20))
+        tk.Label(cuerpo,
+                 text="Seleccione un módulo para administrar el personal y revisar las estadísticas clínicas.\n"
+                      "Asegúrese de mantener los registros actualizados.",
+                 bg="#242424", fg="#9090a8", font=("Segoe UI", 12), justify="left").pack(anchor="w", pady=(5, 0))
 
-        # --- CONFIGURACION OPCIONES ---
-        # Cambiamos a side="top" para que siga el flujo natural debajo de la línea
-        # Usamos fill="both" y expand=True para que el fondo rojo sea visible
-        panel_opciones = tk.Frame(cuerpo, bg="white")
-        panel_opciones.pack(side="top", fill="both", expand=True, padx=10)
+        # --- Contenedor de las tres opciones ---
+        opciones = tk.Frame(cuerpo, bg="#242424")
+        opciones.pack(fill="both", expand=True, pady=(28, 0))
+        opciones.columnconfigure(0, weight=1, uniform="col")
+        opciones.columnconfigure(1, weight=1, uniform="col")
+        opciones.columnconfigure(2, weight=1, uniform="col")
 
-        # Configuracion de columnas para los botones
-        for i in range(2): 
-                panel_opciones.columnconfigure(i, weight=100, uniform="col")
-        
-        self.imageAdministrador = tk.PhotoImage(file="image/avatar_administrador.png", width=90, height=90) # Acceder a la imagen
-        self.imageAdministrador = self.imageAdministrador.subsample(1, 1) 
-
-        btn_administrador = tk.Button(panel_opciones, 
-                                        text="Admins", 
-                                        bg="#8dbb5e",      # Color verde de la imagen
-                                        fg="white",
-                                        image= self.imageAdministrador,
-                                        font=("Aharoni", 10, "bold"),
-                                        compound="top",         # Imagen ARRIBA del texto
-                                        width=100,              # Ancho fijo para hacerlo cuadrado
-                                        height=100,             # Alto fijo
-                                        borderwidth=0,
-                                        pady=8,
-                                        command=lambda:HomeController(self.ventana, datos_usuario)
-                                        )
-        btn_administrador.grid(row=0, column=0, ipadx=5, ipady=5)
-
-
-        self.imageMedico = tk.PhotoImage(file="image/avatar_medico.png", width=100, height=100) # Acceder a la imagen
-        self.imageMedico = self.imageMedico.subsample(1, 1) 
-
-        btn_medico = tk.Button(panel_opciones, 
-                                        text="Medicos", 
-                                        bg="#6C3CDD",      # Color verde de la imagen
-                                        fg="white",
-                                        image= self.imageMedico,
-                                        font=("Aharoni", 10, "bold"),
-                                        compound="top",         # Imagen ARRIBA del texto
-                                        width=130,              # Ancho fijo para hacerlo cuadrado
-                                        height=130,             # Alto fijo
-                                        borderwidth=5,
-                                        pady=5     
-                                        )
-        btn_medico.grid(row=0, column=1, pady=5, ipadx=5, ipady=5)
-
-        
-        # -----------------------------------------------------
-
-
-        # tk.Label(cuerpo, text="Gestion de información", bg="white", fg="black", bd=30, 
-        #         font=("Ahoroni", 15, "bold")).pack()
-
-
-        # opcion_administrador = tk.Frame(cuerpo, bg="white")
-        # opcion_administrador.pack(side="left", padx=(30,50))
-        
-        # tk.Label(opcion_administrador, text="Administradores", bg="white", fg="black",
-        #         font=("Ahoroni", 13)).pack()
-        
-        # self.imageAvatarAdministrador = tk.PhotoImage(file="image/avatar_administrador.png") # Acceder a la imagen
-        # imageAvatar = tk.Label(opcion_administrador, bg="white", image=self.imageAvatarAdministrador, 
-        #                         width=100, height=100)
-        # imageAvatar.pack()
-
-        # self.btn_adm = tk.Button(opcion_administrador, text="INGRESAR", bg="#67b68a", fg="white",
-        #                           width=10, font=("Aharoni", 13, "bold"), ) # Al hacer click, el boton llama al metodo
-        # self.btn_adm.pack()
+        #opciones.rowconfigure(0, weight=1)
         
 
-        # opcion_medico = tk.Frame(cuerpo, bg="white")
-        # opcion_medico.pack(side="left", padx=30)
-        
-        # tk.Label(opcion_medico, text="Medicos", bg="white", fg="black",
-        #         font=("Ahoroni", 13)).pack()
-        
-        # self.imageAvatarMedico = tk.PhotoImage(file="image/avatar_medico.png") # Acceder a la imagen
-        # imageAvatarM = tk.Label(opcion_medico, bg="white", image=self.imageAvatarMedico, 
-        #                         width=100, height=100)
-        # imageAvatarM.pack()
+        # ── ADMINISTRADORES ──────────────────────────────────────────────────
+        borde_adm = tk.Frame(opciones, bg="#242424", padx=1, pady=1)
+        borde_adm.grid(row=0, column=0, sticky="nsew", padx=(0, 14))
 
-        # self.btn_med = tk.Button(opcion_medico, text="INGRESAR", bg="#67b68a", fg="white",
-        #                           width=10, font=("Aharoni", 13, "bold"), ) # Al hacer click, el boton llama al metodo
-        # self.btn_med.pack()
+        opcion_administrador = tk.Frame(borde_adm, bg="#1a1a1f", padx=20, pady=200)
+        opcion_administrador.pack(fill="both", expand=True)
+
+        self.imageAvatarAdministrador = tk.PhotoImage(file="image/avatar_administrador.png")
+        tk.Label(opcion_administrador, bg="#1a1a1f", image=self.imageAvatarAdministrador,
+                 width=72, height=72).pack()
+
+        tk.Label(opcion_administrador, text="Administradores", bg="#1a1a1f", fg="white",
+                 font=("Segoe UI", 13, "bold")).pack(pady=(10, 0))
+
+        tk.Label(opcion_administrador,
+                 text="Gestione cuentas con acceso total al sistema, "
+                      "configuraciones de la clínica y permisos de seguridad del personal.",
+                 bg="#1a1a1f", fg="#9090a8", font=("Segoe UI",10),
+                 justify="center", wraplength=230).pack(pady=(8, 20))
+
+        self.btn_adm = tk.Button(opcion_administrador, text="INGRESAR  →", bg="#7c3aed", fg="white",
+                                 font=("Segoe UI", 10, "bold"), relief="flat", cursor="hand2",
+                                 activebackground="#6d28d9", activeforeground="white",
+                                 padx=10, pady=10, bd=0, command=lambda:HomeController(self.ventana, datos_usuario))
+        self.btn_adm.pack(fill="x")
+
+        # ── MÉDICOS ──────────────────────────────────────────────────────────
+        borde_med = tk.Frame(opciones, bg="#2a2a35", padx=1, pady=1)
+        borde_med.grid(row=0, column=1, sticky="nsew", padx=(0, 14))
+
+        opcion_medico = tk.Frame(borde_med, bg="#1a1a1f", padx=24, pady=200)
+        opcion_medico.pack(fill="both", expand=True)
+
+        self.imageAvatarMedico = tk.PhotoImage(file="image/avatar_medico.png")
+        tk.Label(opcion_medico, bg="#1a1a1f", image=self.imageAvatarMedico,
+                 width=72, height=72).pack()
+
+        tk.Label(opcion_medico, text="Médicos", bg="#1a1a1f", fg="white",
+                 font=("Segoe UI", 13, "bold")).pack(pady=(10, 0))
+
+        tk.Label(opcion_medico,
+                 text="Administre el personal veterinario, horarios, "
+                      "especialidades clínicas y asignaciones de pacientes en curso.",
+                 bg="#1a1a1f", fg="#9090a8", font=("Segoe UI", 10),
+                 justify="center", wraplength=230).pack(pady=(8, 20))
+
+        self.btn_med = tk.Button(opcion_medico, text="INGRESAR  →", bg="#7c3aed", fg="white",
+                                 font=("Segoe UI", 10, "bold"), relief="flat", cursor="hand2",
+                                 activebackground="#6d28d9", activeforeground="white",
+                                 padx=10, pady=10, bd=0)
+        self.btn_med.pack(fill="x")
+
+        # ── REPORTES ─────────────────────────────────────────────────────────
+        borde_rep = tk.Frame(opciones, bg="#2a2a35", padx=1, pady=1)
+        borde_rep.grid(row=0, column=2, sticky="nsew")
+
+        opcion_reporte = tk.Frame(borde_rep, bg="#1a1a1f", padx=24, pady=200)
+        opcion_reporte.pack(fill="both", expand=True)
+
+        self.imageReporte = tk.PhotoImage(file="image/reporte.png")
+        tk.Label(opcion_reporte, bg="#1a1a1f", image=self.imageReporte,
+                 width=72, height=72).pack()
+
+        tk.Label(opcion_reporte, text="Reportes", bg="#1a1a1f", fg="white",
+                 font=("Segoe UI", 13, "bold")).pack(pady=(10, 0))
+
+        tk.Label(opcion_reporte,
+                 text="Visualice análisis clínicos, estadísticas financieras y "
+                      "rendimiento de la clínica mediante gráficos interactivos.",
+                 bg="#1a1a1f", fg="#9090a8", font=("Segoe UI", 10),
+                 justify="center", wraplength=230).pack(pady=(8, 20))
+
+        self.btn_rep = tk.Button(opcion_reporte, text="INGRESAR  →", bg="#7c3aed", fg="white",
+                                 font=("Segoe UI", 10, "bold"), relief="flat", cursor="hand2",
+                                 activebackground="#6d28d9", activeforeground="white",
+                                 padx=10, pady=10, bd=0)
+        self.btn_rep.pack(fill="x")
+        # ----------------------------------------------------
 
 
-        # opcion_reporte = tk.Frame(cuerpo, bg="white")
-        # opcion_reporte.pack(side="left", padx=30)
-        
-        # tk.Label(opcion_reporte, text="Reportes", bg="white", fg="black",
-        #         font=("Ahoroni", 13)).pack()
-        
-        # self.imageReporte = tk.PhotoImage(file="image/reporte.png") # Acceder a la imagen
-        # imageR = tk.Label(opcion_reporte, bg="white", image=self.imageReporte, 
-        #                         width=130, height=100)
-        # imageR.pack()
-
-        # self.btn_rep = tk.Button(opcion_reporte, text="INGRESAR", bg="#67b68a", fg="white",
-        #                           width=10, font=("Aharoni", 13, "bold"), ) # Al hacer click, el boton llama al metodo
-        # self.btn_rep.pack()
+if __name__ == "__main__":
+    # Datos de prueba para poder visualizar la ventana
+    datos_prueba = {"nombre": "Admin", "sexo": "Masculino"}
+    app = HomeVentana(datos_prueba)
+    app.ventana.mainloop()
