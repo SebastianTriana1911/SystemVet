@@ -1,6 +1,5 @@
-import tkinter as tk
 from backend.admin.home_controller import *
-
+import tkinter as tk
 class HomeVentana():
     def __init__(self, datos_usuario):
         self.datos_usuario = datos_usuario
@@ -151,3 +150,5 @@ class HomeVentana():
         # self.btn_rep = tk.Button(opcion_reporte, text="INGRESAR", bg="#67b68a", fg="white",
         #                           width=10, font=("Aharoni", 13, "bold"), ) # Al hacer click, el boton llama al metodo
         # self.btn_rep.pack()
+
+        self.ventana.mainloop()
