@@ -35,7 +35,7 @@ class LoginVentana:
         # self.ventana.maxsize(460,490) 
 
         # Este metodo permite modificar el color de la barra de la ventana 
-        ctk.set_appearance_mode("dark")
+        
         self.ventana.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
         self.ventana.title("SystemVet / Login") # Titulo de la ventana
         self.ventana.config(bg="#1A1A1E",
@@ -179,8 +179,13 @@ class LoginVentana:
             # Se valida el rol del usuario para identificar que vista se le mostrara
             if resultado == "administrador":
                 self.ventana.destroy() # Se elimina la pantalla del login
+                
+               # nueva_ventana = ctk.CTk() # Creamos la nueva ventana principal
+                
+                 
                 ventana_home_admin = HomeVentana(datos_usuario) # Se crea una nueva instancia para la vista siguiente
-                ventana_home_admin.mainloop() 
+                ventana_home_admin.ventana.after(0, lambda: ventana_home_admin.ventana.state('zoomed')) # Maximizar
+                ventana_home_admin.ventana.mainloop() 
             else:
                 pass # CODIGO PARA MEDICOS
         else:
