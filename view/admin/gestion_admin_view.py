@@ -2,8 +2,6 @@ from tkinter import ttk
 import customtkinter as ctk
 import tkinter as tk
 from backend.admin.gestion_admin_controller import *
-from backend.login_controller import LoginController
-
 
 class GestionAdminVentana:
     def __init__(self, ventana, datos_usuario):
@@ -27,35 +25,23 @@ class GestionAdminVentana:
         self.header.pack(side="top",
                           fill="x") # Mantiene el 100% del ancho en la pantalla
         
-        # Cargar la imagen (ya lo tienes, mantenemos el subsample para el tamaño)
+        # Se crea un boton que contenga la imagen del logo que permita volver hacia atras
         self.image_logo = tk.PhotoImage(file="image/logotipo.png").subsample(2, 2)
 
         # Crear el Botón en lugar del Label
         self.btn_regresar = tk.Button(self.header,
-                                      image=self.image_logo,
-                                      bg="#6745B8",          # Mismo color del header
-                                      activebackground="#53339E", # Color cuando se presiona
-                                      bd=0,                  # Quita el borde relieve default
-                                      cursor="hand2",        # Cambia el cursor a manito
-                                      width=70,
-                                      height=70,
-                                      command= lambda: GestionAdminController.regresar_ventana(self.ventana, datos_usuario)) # La función que ejecutarás
+                                       image=self.image_logo,
+                                        bg="#6745B8",          # Mismo color del header
+                                         activebackground="#6745B8", # Color cuando se presiona
+                                          bd=0,                  # Quita el borde relieve default
+                                           cursor="hand2",        # Cambia el cursor a manito
+                                            width=70,
+                                             height=70,
+                                              command= lambda: GestionAdminController.regresar_ventana(self.ventana, datos_usuario))
 
         # Mantener la referencia de la imagen (evita que desaparezca)
         self.btn_regresar.image = self.image_logo
-
-        # Posicionamiento
         self.btn_regresar.pack(side="left", padx=20, pady=10)
-        
-        # self.image_logo = tk.PhotoImage(file="image/logotipo.png").subsample(2, 2) # Acceder a la imagen
-        # image_logo = self.image_logo
-        # image_logo = tk.Label(self.header,
-        #                           bg="#6745B8",
-        #                           width=70,
-        #                           height=70,
-        #                             image=self.image_logo)
-        # image_logo.image = self.image_logo
-        # image_logo.pack(side="left", padx=20, pady=10)
 
         tk.Label(self.header,
                   text="GESTIÓN DE ADMINISTRADORES",
@@ -90,8 +76,8 @@ class GestionAdminVentana:
             tk.Label(self.container_usuario,
                      text="Administrador",
                       bg="#6745B8",
-                      fg="white",
-                       font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
+                       fg="white",
+                        font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
         else:
             tk.Label(self.container_usuario,
                      text="Administradora",
@@ -132,7 +118,7 @@ class GestionAdminVentana:
         self.contenedor_titulo = tk.Frame(self.ventana,
                                           background="#242427",
                                             padx=40,
-                                             pady=20)    
+                                             pady=15)    
         self.contenedor_titulo.pack(fill="x")
 
         # Título a la izquierda
@@ -143,85 +129,95 @@ class GestionAdminVentana:
                    font=("Segoe UI", 15, "bold")).pack(side="left")
 
         # Botón a la derecha
-        self.btn_crear_admin = tk.Button(self.contenedor_titulo, 
-                                            text="+ Registrar Admin", 
-                                             bg="#6745B8", 
-                                              fg="white",
-                                                font=("Segoe UI", 12, "bold"),
-                                                 padx=10, pady=4,
-                                                  borderwidth=3, # Diseño del boton
-                                                   cursor="hand2") # Cambia el raton cuando se pasa por encima
-        self.btn_crear_admin.pack(side="right") # El boton se encontrara a la derecha del contenedor
+        self.btn_crear_admin = ctk.CTkButton(self.contenedor_titulo, 
+                                      text="+ Registrar Admin", 
+                                       fg_color="#0A6DDF",       # Reemplaza 'bg' (Azul)
+                                        text_color="white",       # Reemplaza 'fg'
+                                         hover_color="#0830B1",    
+                                          font=("Segoe UI", 15, "bold"),
+                                           width=160,                # Ancho adaptado en píxeles para este botón
+                                            height=50,                
+                                             border_width=0,           # Eliminamos el borde antiguo de tk
+                                              corner_radius=15,         
+                                               cursor="hand2",
+                                                                  ) # Recuerda asignarle su función aquí
+        self.btn_crear_admin.pack(side="right", padx=10, pady=5)
 
         # Se genera una linea para separar las secciones
         self.linea_divisor = tk.Frame(self.ventana,
                                        bg="white",
                                          height=2)
-        self.linea_divisor.pack(fill="x", padx=40, pady=5)
+        self.linea_divisor.pack(fill="x", padx=40, pady=(0,50))
         # ==========================================================================
 
 
         # ==========================================================================
         # CONFIGURACION DE LA TABLA ADMINS
         # ==========================================================================
-        # --- CONFIGURACIÓN DE ESTILOS MODERNOS ---
         style = ttk.Style()
         style.theme_use("clam")
 
-        # Personalizamos el cuerpo de la tabla (Full Dark)
-        style.configure("Treeview", 
-                         background="#242427", 
-                          foreground="#E0E0E0", 
-                           fieldbackground="#242427", 
-                            rowheight=45, # Más alto para que se vea premium
-                             font=("Segoe UI", 11),
-                              borderwidth=0)
-
-        # Encabezado Morado con altura y fuente clara
-        style.configure("Treeview.Heading", 
-                         background="#6745B8", 
-                          foreground="white", 
-                           relief="flat",
-                            font=("Segoe UI", 12, "bold"))
-
-        # Color al seleccionar una fila (Morado eléctrico)
-        style.map("Treeview", background=[('selected', '#53339E')])
+        # --- CUERPO DE LA TABLA (Ajuste de contraste) ---
+        style.configure("Treeview",
+                         background="#C2C2C2",       # Color base de la tabla
+                          foreground="black",  # Color de la letra
+                           fieldbackground="#C2C2C2",
+                            rowheight=50,
+                             font=("Segoe UI", 11, "bold"))
         
-
-
-        # --- CONTENEDOR DE LA TABLA (Pantalla Completa) ---
-        # Usamos fill="both" y expand=True para que ocupe todo el ancho y alto
-        self.contenedor_tabla = tk.Frame(self.ventana,
-                                          bg="#1A1A1E")
+        style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})]) 
+        
+        # Color de selección
+        style.map("Treeview",
+                  background=[("selected", "#838282")], # Hover de los encabezados
+                   foreground=[("selected", "black")])
+        
+        # Configuracion de los encabezados
+        style.configure("Treeview.Heading",
+                         background="#19191A",      
+                          foreground="white",
+                           font=("Segoe UI", 12, "bold"),
+                            bordercolor="#1A1A1E",      # Esto ayuda a definir la intersección superior
+                             borderwidth=3)
+        
+        style.map("Treeview.Heading", background=[("active", "#818385")])
+                
+        # Contenedor de la tabla
+        self.contenedor_tabla = ctk.CTkFrame(self.ventana, fg_color="#1A1A1E", corner_radius=15)
         self.contenedor_tabla.pack(fill="both",
                                     expand=True,
-                                      padx=20,
-                                        pady=10)
+                                      padx=200,
+                                        pady=(20,70))
 
-        # Definición de columnas
+        # Nombre de las columnas
         columnas = ("Nit", "Nombre", "Apellido", "Sexo", "Telefono", "Password", "Acciones")
 
+        # Creacion de los apartados de la tabla
         self.tabla = ttk.Treeview(self.contenedor_tabla, 
                                    columns=columnas, 
                                     show="headings", 
-                                     selectmode="browse")
+                                     selectmode="browse",
+                                      style="Treeview")
 
-        # Scrollbar estilizado
+        # Dibujo de la separacion entre las filas
+        self.tabla.tag_configure('par', background="#C7C7C7")
+        self.tabla.tag_configure('impar', background="#B1B1B1") # Un gris mas oscuro para diferenciar
+
+        # Scrollbar
         self.scroll_y = ttk.Scrollbar(self.contenedor_tabla,
                                        orient="vertical",
                                          command=self.tabla.yview)
         
         self.tabla.configure(yscrollcommand=self.scroll_y.set)
 
-        # --- CONFIGURACIÓN DINÁMICA DE COLUMNAS ---
-        # Al usar stretch=True, las columnas se repartirán el ancho de la pantalla
-        self.tabla.column("Nit", width=100, anchor="center", stretch=True)
-        self.tabla.column("Nombre", width=150, anchor="w", stretch=True)
-        self.tabla.column("Apellido", width=150, anchor="w", stretch=True)
+        # Configuracion de las columnas
+        self.tabla.column("Nit", width=80, anchor="center", stretch=True)
+        self.tabla.column("Nombre", width=80, anchor="center", stretch=True)
+        self.tabla.column("Apellido", width=80, anchor="center", stretch=True)
         self.tabla.column("Sexo", width=80, anchor="center", stretch=True)
-        self.tabla.column("Telefono", width=120, anchor="center", stretch=True)
-        self.tabla.column("Password", width=120, anchor="center", stretch=True)
-        self.tabla.column("Acciones", width=150, anchor="center", stretch=True)
+        self.tabla.column("Telefono", width=80, anchor="center", stretch=True)
+        self.tabla.column("Password", width=80, anchor="center", stretch=True)
+        self.tabla.column("Acciones", width=80, anchor="center", stretch=True)
 
         # Cabeceras
         for col in columnas:
@@ -231,107 +227,7 @@ class GestionAdminVentana:
         self.scroll_y.pack(side="right", fill="y")
         self.tabla.pack(side="left", fill="both", expand=True)
 
-        # [ CONTINUACIÓN DE TU CÓDIGO ]
-        # ... (Después de self.tabla.pack)
-
-        # 1. Instanciamos el controlador de Gestión de Administradores
-        # Le pasamos 'self' para que el controlador tenga acceso a 'self.tabla'
+        # --- CONTROLADOR ---
         self.controlador_admin = GestionAdminController(self)
-
-        # 2. Llamamos al método para cargar los datos inmediatamente
         self.controlador_admin.cargar_datos_tabla()
-        
-        
-        
-        # style = ttk.Style()
-        # style.theme_use("clam")
-        
-        # style.configure("Treeview", 
-        #                  background="#1A1A1E", 
-        #                   foreground="white", 
-        #                    fieldbackground="#1A1A1E", 
-        #                     rowheight=35, 
-        #                      font=("Segoe UI", 10))
-        
-        # style.configure("Treeview.Heading", 
-        #                  background="#6745B8", 
-        #                   foreground="white", 
-        #                    relief="flat",
-        #                     font=("Segoe UI", 10, "bold"))
-        
-        # style.map("Treeview", background=[('selected', '#53339E')])
-
-        # # # --- CONTENEDOR ---
-        # self.contenedor_tabla = tk.Frame(self.ventana, bg="#1A1A1E", pady=20)
-        # self.contenedor_tabla.pack(fill="x", expand=True)
-
-        # # --- CREACIÓN DEL TREEVIEW ---
-        # # Asegúrate de que estos nombres coincidan con los de abajo
-        # self.columnas = ("Nit", "Nombre", "Apellido", "Sexo", "Telefono", "Password", "Acciones")
-        
-        # self.tabla = ttk.Treeview(self.contenedor_tabla, 
-        #                           columns=self.columnas, 
-        #                           show="headings", 
-        #                           height=12)
-
-        # # Scrollbar
-        # self.scroll_y = ttk.Scrollbar(self.contenedor_tabla, orient="vertical", command=self.tabla.yview)
-        # self.tabla.configure(yscrollcommand=self.scroll_y.set)
-
-        # # --- CONFIGURACIÓN DE COLUMNAS (CORREGIDO) ---
-        # # Los nombres deben ser idénticos a los de la tupla self.columnas
-        # self.tabla.column("Nit", width=100, anchor="center")
-        # self.tabla.column("Nombre", width=120)
-        # self.tabla.column("Apellido", width=120)
-        # self.tabla.column("Sexo", width=80, anchor="center")
-        # self.tabla.column("Telefono", width=120, anchor="center")
-        # self.tabla.column("Password", width=100, anchor="center")
-        # self.tabla.column("Acciones", width=100, anchor="center")
-
-        # # Cabeceras
-        # self.tabla.heading("Nit", text="NIT / ID")
-        # self.tabla.heading("Nombre", text="NOMBRE")
-        # self.tabla.heading("Apellido", text="APELLIDO")
-        # self.tabla.heading("Sexo", text="SEXO")
-        # self.tabla.heading("Telefono", text="TELÉFONO")
-        # self.tabla.heading("Password", text="CONTRASEÑA")
-        # self.tabla.heading("Acciones", text="ACCIONES")
-
-        # # Empaquetado
-        # self.tabla.pack(side="left")
-        # self.scroll_y.pack(side="right", fill="y")
-
-
-
-
-
-
-
-    # def cargar_datos_tabla(self):
-    #     # 1. Obtener el diccionario (NIT como llave)
-    #     data = LoginController.obtener_usuarios()
-        
-    #     # 2. Limpiar la tabla para evitar duplicados
-    #     for row in self.vista.tabla.get_children():
-    #         self.vista.tabla.delete(row)
-    
-    #     # 3. Validar si data tiene contenido
-    #     if not data:
-    #         print("DEBUG: El diccionario 'data' está vacío.")
-    #         return
-    
-    #     # 4. Iterar usando el NIT como llave primaria
-    #     for nit, info in data.items():
-    #         # Limpiamos el valor del rol para comparar correctamente
-    #         rol_usuario = str(info.get('rol', '')).strip().lower()
-            
-    #         if rol_usuario == 'administrador':
-    #             self.vista.tabla.insert("", "end", values=(
-    #                 nit,                           # Nuestra Llave Primaria
-    #                 info.get('nombre', 'N/A'),
-    #                 info.get('apellido', 'N/A'),
-    #                 info.get('sexo', 'N/A'),
-    #                 info.get('telefono', 'N/A'),
-    #                 "********",                    # No mostramos la clave
-    #                 "  ✎ Modificar  |  🗑 Borrar  "
-    #             ))
+        # ==========================================================================
