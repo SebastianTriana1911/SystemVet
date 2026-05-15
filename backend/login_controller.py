@@ -4,6 +4,7 @@ cual contiene todos los usuarios registrados y verificar si la informacion ingre
 corresponde a un usuario ya existente
 """
 import json
+from customtkinter import *
 
 class LoginController:
     def __init__(self):
@@ -39,23 +40,25 @@ class LoginController:
     # ==========================================================================
     # FUNCIONES PARA EFECTOS VISUALES DE LOS CAMPOS DE ENTRADA "ENTRY"
     # ==========================================================================
-    def entrada_foco(e):
-        e.widget.config(bg="white", fg="#000000") # Fondo blanco puro al escribir
-    def salida_foco(e):
-        e.widget.config(bg="white", fg="#333333") # Gris claro cuando no está seleccionado
-    def entrada_hover(e, ventana):
-        if ventana.focus_get() != e.widget: # Solo si el usuario no está escribiendo en él
-            e.widget.config(bg="white")
-    def salida_hover(e, ventana):
-        if ventana.focus_get() != e.widget:
-            e.widget.config(bg="#DADADA")
-
-
-    def on_enter(e):
-        e.widget['background'] = "#53339E" # Color más claro al entrar
-
-    def on_leave(e):
-        e.widget['background'] = "#6745B8" # Color original al salir
+    @staticmethod
+    def al_entrar_entry(widget):
+        # Si el entry está vacío, aplicamos el efecto de "encendido"
+        if len(widget.get()) == 0:
+            widget.configure(fg_color="#EBEBEB") # Gris muy claro / Blanco
+        else:
+            # Si tiene texto, lo mantenemos en blanco sólido
+            widget.configure(fg_color="white")
+        widget.update_idletasks()
+    
+    @staticmethod
+    def al_salir_entry(widget):
+        # Si el usuario NO ha escrito nada, vuelve al grisáceo original
+        if len(widget.get()) == 0:
+            widget.configure(fg_color="#AAA9A9")
+        else:
+            # Si ya tiene texto, se queda en blanco para resaltar que está lleno
+            widget.configure(fg_color="white")
+        widget.update_idletasks()
     # ==========================================================================
 
 

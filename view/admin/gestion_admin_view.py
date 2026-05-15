@@ -13,15 +13,11 @@ class GestionAdminVentana:
         self.ventana = ventana
         self.datos_usuario = datos_usuario
 
-       
-        
         ctk.set_appearance_mode("dark")
         self.ventana.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
         self.ventana.title("SystemVet / Gestión de Administradores")
         self.ventana.configure(bg="black", bd=10)
-        # self.ventana.configure(bg="#1A1A1E", bd=10)
         # ===========================================================================
-
 
         # ==========================================================================
         # CONFIGURACION DEL HEADER
@@ -31,15 +27,35 @@ class GestionAdminVentana:
         self.header.pack(side="top",
                           fill="x") # Mantiene el 100% del ancho en la pantalla
         
-        self.image_logo = tk.PhotoImage(file="image/logotipo.png").subsample(2, 2) # Acceder a la imagen
-        image_logo = self.image_logo
-        image_logo = tk.Label(self.header,
-                                  bg="#6745B8",
-                                  width=70,
-                                  height=70,
-                                    image=self.image_logo)
-        image_logo.image = self.image_logo
-        image_logo.pack(side="left", padx=20, pady=10)
+        # Cargar la imagen (ya lo tienes, mantenemos el subsample para el tamaño)
+        self.image_logo = tk.PhotoImage(file="image/logotipo.png").subsample(2, 2)
+
+        # Crear el Botón en lugar del Label
+        self.btn_regresar = tk.Button(self.header,
+                                      image=self.image_logo,
+                                      bg="#6745B8",          # Mismo color del header
+                                      activebackground="#53339E", # Color cuando se presiona
+                                      bd=0,                  # Quita el borde relieve default
+                                      cursor="hand2",        # Cambia el cursor a manito
+                                      width=70,
+                                      height=70,
+                                      command= lambda: GestionAdminController.regresar_ventana(self.ventana, datos_usuario)) # La función que ejecutarás
+
+        # Mantener la referencia de la imagen (evita que desaparezca)
+        self.btn_regresar.image = self.image_logo
+
+        # Posicionamiento
+        self.btn_regresar.pack(side="left", padx=20, pady=10)
+        
+        # self.image_logo = tk.PhotoImage(file="image/logotipo.png").subsample(2, 2) # Acceder a la imagen
+        # image_logo = self.image_logo
+        # image_logo = tk.Label(self.header,
+        #                           bg="#6745B8",
+        #                           width=70,
+        #                           height=70,
+        #                             image=self.image_logo)
+        # image_logo.image = self.image_logo
+        # image_logo.pack(side="left", padx=20, pady=10)
 
         tk.Label(self.header,
                   text="GESTIÓN DE ADMINISTRADORES",
@@ -154,19 +170,19 @@ class GestionAdminVentana:
 
         # Personalizamos el cuerpo de la tabla (Full Dark)
         style.configure("Treeview", 
-                        background="#242427", 
-                        foreground="#E0E0E0", 
-                        fieldbackground="#242427", 
-                        rowheight=45, # Más alto para que se vea premium
-                        font=("Segoe UI", 11),
-                        borderwidth=0)
+                         background="#242427", 
+                          foreground="#E0E0E0", 
+                           fieldbackground="#242427", 
+                            rowheight=45, # Más alto para que se vea premium
+                             font=("Segoe UI", 11),
+                              borderwidth=0)
 
         # Encabezado Morado con altura y fuente clara
         style.configure("Treeview.Heading", 
-                        background="#6745B8", 
-                        foreground="white", 
-                        relief="flat",
-                        font=("Segoe UI", 12, "bold"))
+                         background="#6745B8", 
+                          foreground="white", 
+                           relief="flat",
+                            font=("Segoe UI", 12, "bold"))
 
         # Color al seleccionar una fila (Morado eléctrico)
         style.map("Treeview", background=[('selected', '#53339E')])
@@ -175,19 +191,26 @@ class GestionAdminVentana:
 
         # --- CONTENEDOR DE LA TABLA (Pantalla Completa) ---
         # Usamos fill="both" y expand=True para que ocupe todo el ancho y alto
-        self.contenedor_tabla = tk.Frame(self.ventana, bg="#1A1A1E")
-        self.contenedor_tabla.pack(fill="both", expand=True, padx=20, pady=10)
+        self.contenedor_tabla = tk.Frame(self.ventana,
+                                          bg="#1A1A1E")
+        self.contenedor_tabla.pack(fill="both",
+                                    expand=True,
+                                      padx=20,
+                                        pady=10)
 
         # Definición de columnas
         columnas = ("Nit", "Nombre", "Apellido", "Sexo", "Telefono", "Password", "Acciones")
 
         self.tabla = ttk.Treeview(self.contenedor_tabla, 
-                                  columns=columnas, 
-                                  show="headings", 
-                                  selectmode="browse")
+                                   columns=columnas, 
+                                    show="headings", 
+                                     selectmode="browse")
 
         # Scrollbar estilizado
-        self.scroll_y = ttk.Scrollbar(self.contenedor_tabla, orient="vertical", command=self.tabla.yview)
+        self.scroll_y = ttk.Scrollbar(self.contenedor_tabla,
+                                       orient="vertical",
+                                         command=self.tabla.yview)
+        
         self.tabla.configure(yscrollcommand=self.scroll_y.set)
 
         # --- CONFIGURACIÓN DINÁMICA DE COLUMNAS ---
@@ -207,6 +230,16 @@ class GestionAdminVentana:
         # Empaquetado
         self.scroll_y.pack(side="right", fill="y")
         self.tabla.pack(side="left", fill="both", expand=True)
+
+        # [ CONTINUACIÓN DE TU CÓDIGO ]
+        # ... (Después de self.tabla.pack)
+
+        # 1. Instanciamos el controlador de Gestión de Administradores
+        # Le pasamos 'self' para que el controlador tenga acceso a 'self.tabla'
+        self.controlador_admin = GestionAdminController(self)
+
+        # 2. Llamamos al método para cargar los datos inmediatamente
+        self.controlador_admin.cargar_datos_tabla()
         
         
         

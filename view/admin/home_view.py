@@ -5,6 +5,7 @@ import tkinter as tk
 class HomeVentana():
     def __init__(self, datos_usuario):
         self.datos_usuario = datos_usuario
+        
 
         # ----------- CONFIGURACION DE LA VENTANA -----------
         self.ventana = ctk.CTk()
@@ -12,6 +13,9 @@ class HomeVentana():
         self.ventana.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
         self.ventana.title("SystemVet / Gestión de Administradores")
         self.ventana.configure(bg="black", bd=10)
+
+
+        self.ventana.after(0, lambda: self.ventana.state('zoomed'))
         # ----------------------------------------------------
 
         # ----------- CONFIGURACION DEL ENCABEZADO -----------
@@ -198,9 +202,11 @@ class HomeVentana():
         self.btn_rep.pack(fill="x")
         # ----------------------------------------------------
 
+        self.ventana.mainloop()
 
-if __name__ == "__main__":
-    # Datos de prueba para poder visualizar la ventana
-    datos_prueba = {"nombre": "Admin", "sexo": "Masculino"}
-    app = HomeVentana(datos_prueba)
-    app.ventana.mainloop()
+
+# if __name__ == "__main__":
+#     # Datos de prueba para poder visualizar la ventana
+#     datos_prueba = {"nombre": "Admin", "sexo": "Masculino"}
+#     app = HomeVentana(datos_prueba)
+#     app.ventana.mainloop()
