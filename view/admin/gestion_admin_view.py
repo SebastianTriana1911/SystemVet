@@ -13,7 +13,7 @@ class GestionAdminVentana:
 
         ctk.set_appearance_mode("dark")
         self.ventana.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
-        self.ventana.title("SystemVet / Gestión de Administradores")
+        self.ventana.title("SystemVet - Gestión de Administradores")
         self.ventana.configure(bg="black", bd=10)
         # ===========================================================================
 
