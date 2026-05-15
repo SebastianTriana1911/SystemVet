@@ -40,24 +40,22 @@ class LoginController:
     # ==========================================================================
     # FUNCIONES PARA EFECTOS VISUALES DE LOS CAMPOS DE ENTRADA "ENTRY"
     # ==========================================================================
-    @staticmethod
     def al_entrar_entry(widget):
         # Si el entry está vacío, aplicamos el efecto de "encendido"
         if len(widget.get()) == 0:
-            widget.configure(fg_color="#EBEBEB") # Gris muy claro / Blanco
+            widget.configure(fg_color="#0D0D0F") # Gris muy claro / Blanco
         else:
             # Si tiene texto, lo mantenemos en blanco sólido
-            widget.configure(fg_color="white")
+            widget.configure(fg_color="#1A1A1E")
         widget.update_idletasks()
     
-    @staticmethod
     def al_salir_entry(widget):
         # Si el usuario NO ha escrito nada, vuelve al grisáceo original
         if len(widget.get()) == 0:
-            widget.configure(fg_color="#AAA9A9")
+            widget.configure(fg_color="#1A1A1E")
         else:
             # Si ya tiene texto, se queda en blanco para resaltar que está lleno
-            widget.configure(fg_color="white")
+            widget.configure(fg_color="#1A1A1E")
         widget.update_idletasks()
     # ==========================================================================
 
