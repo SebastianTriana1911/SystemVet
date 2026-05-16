@@ -77,13 +77,13 @@ class GestionAdminVentana:
                      text="Administrador",
                       bg="#45A29E",
                        fg="white",
-                        font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
+                        font=("Segoe UI", 15, "bold")).pack(side="top", anchor="e")
         else:
             tk.Label(self.container_usuario,
                      text="Administradora",
                       bg="#45A29E",
                       fg="white",
-                       font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
+                       font=("Segoe UI", 14, "bold")).pack(side="top", anchor="e")
         
         # Contenedor que organiza el nombre del usuario y el boton de manera horizontal
         self.fila_nombre = tk.Frame(self.container_usuario,
@@ -95,14 +95,14 @@ class GestionAdminVentana:
                    text=f"{datos_usuario['nombre']} {datos_usuario["apellido"]}    | ",
                     bg="#45A29E",
                      fg="white", 
-                      font=("Segoe UI", 13, "bold")).pack(side="left", padx=(0, 5))
+                      font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
         
         # Botón Cerrar Sesión (Al lado del nombre)
         self.btn_cerrar_sesion = tk.Button(self.fila_nombre, 
                                             text="Cerrar sesión", 
                                              bg="#45A29E", 
                                                 fg="white",
-                                                 font=("Segoe UI", 12, "bold"),                                                  
+                                                 font=("Segoe UI", 13, "bold"),                                                  
                                                   borderwidth=0,
                                                    cursor="hand2",
                                                     command= lambda:GestionAdminController.cerrar_sesion(ventana) # Cambia el cursor al pasar por encima
@@ -211,6 +211,7 @@ class GestionAdminVentana:
         
         self.tabla.configure(yscrollcommand=self.scroll_y.set)
 
+
         # Configuracion de las columnas
         self.tabla.column("Nit", width=80, anchor="center", stretch=True)
         self.tabla.column("Nombre", width=80, anchor="center", stretch=True)
@@ -220,15 +221,25 @@ class GestionAdminVentana:
         self.tabla.column("Password", width=80, anchor="center", stretch=True)
         self.tabla.column("Acciones", width=80, anchor="center", stretch=True)
 
+
+
         # Cabeceras
         for col in columnas:
             self.tabla.heading(col, text=col.upper())
+
+
 
         # Empaquetado
         self.scroll_y.pack(side="right", fill="y")
         self.tabla.pack(side="left", fill="both", expand=True)
 
-        # --- CONTROLADOR ---
+
+
+        # Esta instancia de la clase GestionAdminControler me permite acceder al metodo de cargar tabla
         self.controlador_admin = GestionAdminController(self)
-        self.controlador_admin.cargar_datos_tabla()
+
+        # Este atributo contiene toda la informacion de la tabla con los registro, por ender, despues de crear
+        # un nuevo administrador en el formulario, se pasa este metodo, puesto que es el que permite cargar 
+        # y mostrar nuevamente la tabla con todos los datos actualizados
+        self.controlador_admin.cargar_datos_tabla() 
         # ==========================================================================

@@ -1,6 +1,6 @@
 {
     "1": {
-        "nombre": "Johan Sebastian",
+        "nombre": "Johan Sebastiannnn",
         "apellido": "Triana Camacho",
         "sexo": "Masculino",
         "telefono": "3214860900",
@@ -22,5 +22,13 @@
         "telefono": "3217894511",
         "rol": "administrador",
         "password": "Jorge"
+    },
+    "121": {
+        "nombre": "1",
+        "apellido": "1",
+        "sexo": "Masculino",
+        "telefono": "1",
+        "rol": "administrador",
+        "password": "1"
     }
 }

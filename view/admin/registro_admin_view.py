@@ -2,12 +2,18 @@ import customtkinter as ctk
 from backend.admin.registro_admin_controller import *
 
 class RegistroAdminView(ctk.CTkToplevel):
-    def __init__(self, ventana_padre, controlador_gestion):
+    def __init__(self, ventana_padre, controlador_gestion, nit_editar=None):
         super().__init__(ventana_padre)
         self.ventana_padre = ventana_padre
+        self.nit_editar = nit_editar
 
         self.controlador_gestion = controlador_gestion
         self.controlador_registro = RegistroAdminController(self)
+
+        # if self.nit_editar:
+        #   self.controlador_registro.cargar_datos_para_editar(self.nit_editar)
+
+
         # ==========================================================================
         # CONFIGURACION DE LA MODAL
         # ==========================================================================
@@ -49,10 +55,20 @@ class RegistroAdminView(ctk.CTkToplevel):
         self.crear_componentes()
         
 
+        if self.nit_editar:
+          print(f"Enviando NIT {self.nit_editar} al controlador para rellenar campos...") # Control
+          self.controlador_registro.cargar_datos_para_editar(self.nit_editar)
     # ==========================================================================
     # CREACION DE COMPONENTES DEL FORMULARIO
     # ==========================================================================
+    # El formulario para registrar y editar es el mismo, por ende se reutiliza los componentes del formulario con la 
+    # diferencia de que se valida por medio de un condicionar para que se va a utilizar
     def crear_componentes(self):
+        # Determinar textos según el modo
+        texto_banner = "📝  ACTUALIZAR ADMINISTRADOR" if self.nit_editar else "➕ REGISTRAR NUEVO ADMINISTRADOR"
+        texto_boton = "✔ ACTUALIZAR DATOS" if self.nit_editar else "✔  CREAR ADMINISTRADOR"
+
+
         # Titulo superiro del formulario
         self.banner_titulo = ctk.CTkFrame(self,
                                            fg_color="#45A29E",
@@ -63,7 +79,7 @@ class RegistroAdminView(ctk.CTkToplevel):
 
         # Atributos del titulo
         self.label_titulo = ctk.CTkLabel(self.banner_titulo, 
-                                            text="➕ REGISTRAR NUEVO ADMINISTRADOR", 
+                                            text= texto_banner, 
                                                 font=("Segoe UI", 16, "bold"), 
                                                     text_color="white")
         self.label_titulo.pack(expand=True) # El titulo se expande en las dimensiones del Frame
@@ -192,7 +208,7 @@ class RegistroAdminView(ctk.CTkToplevel):
         # BOTON REGISTRAR
         # =====================================================================
         self.btn_registrar = ctk.CTkButton(self.card_formulario, 
-                                            text="✔ CREAR ADMINISTRADOR", 
+                                            text=texto_boton, 
                                              font=("Segoe UI", 13, "bold"),
                                               fg_color="#45A24D", 
                                                hover_color="#3E7231", 
@@ -200,7 +216,7 @@ class RegistroAdminView(ctk.CTkToplevel):
                                                 width=80,
                                                  height=45, 
                                                   corner_radius=10,
-                                                   command= self.ejecutar_registro # Vincularemos esto al controlador luego
+                                                   command= self.ejecutar_accion # Vincularemos esto al controlador luego
                                                                                     )
         self.btn_registrar.grid(row=6, column=1,  pady=(0, 20), )
 
@@ -229,3 +245,11 @@ class RegistroAdminView(ctk.CTkToplevel):
         # Al cerrar, devolvemos la opacidad total (1.0) a la ventana de gestión
         self.ventana_padre.attributes("-alpha", 1.0)
         self.destroy()
+
+    def ejecutar_accion(self):
+        # Si nit_editar tiene un valor, significa que entramos por el botón Editar de la tabla
+        if self.nit_editar:
+            self.controlador_registro.actualizar_usuario(self.nit_editar)
+        else:
+            # Si nit_editar es None, significa que abrimos el formulario limpio desde "+ Registrar Admin"
+            self.controlador_registro.registrar_usuario()    

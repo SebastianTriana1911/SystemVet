@@ -43,9 +43,8 @@ class LoginController:
     def al_entrar_entry(widget):
         # Si el entry está vacío, aplicamos el efecto de "encendido"
         if len(widget.get()) == 0:
-            widget.configure(fg_color="#0D0D0F") # Gris muy claro / Blanco
+            widget.configure(fg_color="#0D0D0F") 
         else:
-            # Si tiene texto, lo mantenemos en blanco sólido
             widget.configure(fg_color="#1A1A1E")
         widget.update_idletasks()
     
@@ -54,7 +53,6 @@ class LoginController:
         if len(widget.get()) == 0:
             widget.configure(fg_color="#1A1A1E")
         else:
-            # Si ya tiene texto, se queda en blanco para resaltar que está lleno
             widget.configure(fg_color="#1A1A1E")
         widget.update_idletasks()
     # ==========================================================================

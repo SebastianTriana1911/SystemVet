@@ -154,7 +154,7 @@ class LoginVentana:
             if resultado == "administrador":
                 self.ventana.destroy() 
                 ventana_home_admin = HomeVentana(datos_usuario) 
-                ventana_home_admin.mainloop() 
+                # ventana_home_admin.mainloop() 
             else:
                 pass 
         else:
