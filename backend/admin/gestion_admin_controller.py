@@ -98,10 +98,13 @@ class GestionAdminController:
 
 
     # Este método se ejecutaría al hacer clic en "+ Registrar Admin"
-    def abrir_formulario_registro(ventana_gestion_admin):
+    def abrir_formulario_registro(ventana_gestion_admin, controlador_admin):
+
         ventana_gestion_adm = ventana_gestion_admin
+        controlador = controlador_admin
+
         # Importamos la vista y la abrimos pasándole la ventana actual
         from view.admin.registro_admin_view import RegistroAdminView
-        ventana_registro = RegistroAdminView(ventana_gestion_adm)
+        ventana_registro = RegistroAdminView(ventana_gestion_adm, controlador)
 
 

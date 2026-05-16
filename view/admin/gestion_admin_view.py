@@ -95,7 +95,7 @@ class GestionAdminVentana:
                    text=f"{datos_usuario['nombre']} {datos_usuario["apellido"]}    | ",
                     bg="#45A29E",
                      fg="white", 
-                      font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
+                      font=("Segoe UI", 13, "bold")).pack(side="left", padx=(0, 5))
         
         # Botón Cerrar Sesión (Al lado del nombre)
         self.btn_cerrar_sesion = tk.Button(self.fila_nombre, 
@@ -140,8 +140,8 @@ class GestionAdminVentana:
                                              border_width=0,           # Eliminamos el borde antiguo de tk
                                               corner_radius=15,         
                                                cursor="hand2",
-                                                command= lambda: GestionAdminController.abrir_formulario_registro(self.ventana)
-                                                                  ) # Recuerda asignarle su función aquí
+                                                command= lambda: GestionAdminController.abrir_formulario_registro(self.ventana, self.controlador_admin)
+                                                                  )
         self.btn_crear_admin.pack(side="right", padx=10, pady=5)
 
         # Se genera una linea para separar las secciones

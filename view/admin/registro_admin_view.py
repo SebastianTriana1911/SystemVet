@@ -1,15 +1,18 @@
 import customtkinter as ctk
+from backend.admin.registro_admin_controller import *
 
 class RegistroAdminView(ctk.CTkToplevel):
-    def __init__(self, ventana_padre):
+    def __init__(self, ventana_padre, controlador_gestion):
         super().__init__(ventana_padre)
         self.ventana_padre = ventana_padre
 
+        self.controlador_gestion = controlador_gestion
+        self.controlador_registro = RegistroAdminController(self)
         # ==========================================================================
         # CONFIGURACION DE LA MODAL
         # ==========================================================================
         ctk.set_appearance_mode("dark")
-        self.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
+        # self.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
         self.title("SystemVet - Formulario Administradores")
 
         # Se obtiene las dimensiones de la pantalla
@@ -32,8 +35,8 @@ class RegistroAdminView(ctk.CTkToplevel):
         # Se restringe el poder modificar las dimensiones de la ventana
         self.resizable(False, False)
         
-        # Cada que se abre la ventana emepergente se accede a la ventana padre "GestionAdminView" para bajarle la opacidad
-        self.ventana_padre.attributes("-alpha", 0.9)
+        # # Cada que se abre la ventana emepergente se accede a la ventana padre "GestionAdminView" para bajarle la opacidad
+        # self.ventana_padre.attributes("-alpha", 0.9)
         
         # Bloquea toda pantalla obligando a interactuar con la modal
         self.grab_set() # Obliga al usuario a interacturar con la ventana emergente bloqueando los click que haga fuera de esta
@@ -197,7 +200,7 @@ class RegistroAdminView(ctk.CTkToplevel):
                                                 width=80,
                                                  height=45, 
                                                   corner_radius=10,
-                                                   command=self.ejecutar_registro # Vincularemos esto al controlador luego
+                                                   command= self.ejecutar_registro # Vincularemos esto al controlador luego
                                                                                     )
         self.btn_registrar.grid(row=6, column=1,  pady=(0, 20), )
 
@@ -213,14 +216,14 @@ class RegistroAdminView(ctk.CTkToplevel):
                                              text_color="white",
                                                height=45, 
                                                 corner_radius=8,
-                                                 command=self.al_cerrar
+                                                 command= self.al_cerrar
                                                                         )
         self.btn_volver.grid(row=6, column=0, ipadx=5, pady=(0, 20))
 
 
     def ejecutar_registro(self):
         # Este método servirá de puente para que el RegistroAdminController capture los datos
-        pass
+        self.controlador_registro.registrar_usuario()
 
     def al_cerrar(self):
         # Al cerrar, devolvemos la opacidad total (1.0) a la ventana de gestión
