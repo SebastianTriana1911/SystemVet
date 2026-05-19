@@ -19,7 +19,7 @@ class GestionAdminVentana:
         ctk.set_appearance_mode("dark")
         self.ventana.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
         self.ventana.title("SystemVet - Gestión de Administradores")
-        self.ventana.configure(bg="black", bd=10)
+        self.ventana.configure(bd=10)
         # ===========================================================================
 
         # ==========================================================================
@@ -135,13 +135,13 @@ class GestionAdminVentana:
         # ==========================================================================
         # Contenedor titulo
         self.contenedor_titulo = tk.Frame(self.ventana,
-                                            background="#242427",
+                                            background="#1A1A1E",
                                             padx=80,
                                             pady=15)    
         self.contenedor_titulo.pack(fill="x")
 
         self.contenedor_titulo_separado = tk.Frame(self.contenedor_titulo,
-                                                    bg="#242427")
+                                                    bg="#1A1A1E")
         self.contenedor_titulo_separado.pack(side="left")
 
         # Título (PANEL DE CONTROL)
@@ -149,35 +149,36 @@ class GestionAdminVentana:
                 text="PANEL DE CONTRO",
                 # textvariable= self.contador_masculino, 
                 fg="#45A29E", 
-                bg="#242427", 
+                
+                bg="#1A1A1E", 
                 font=("Segoe UI", 15, "bold")).pack(side="top", anchor="w")
 
         # Título (Administradores registrados)
         tk.Label(self.contenedor_titulo_separado, 
                 text="Administradores registrados", 
                 fg="white", 
-                bg="#242427", 
+                bg="#1A1A1E", 
                 font=("Segoe UI", 13, "bold")).pack(side="top", anchor="w")
 
         tk.Label(self.contenedor_titulo_separado, 
                 text="En este apartado podras crear, editar o eliminar cuentas de acceso al sistema", 
                 fg="white", 
-                bg="#242427", 
-                font=("Segoe UI", 13)).pack(side="top", anchor="w")
+                bg="#1A1A1E",  
+                font=("Segoe UI", 13)).pack(side="top", anchor="w", pady=(12,0))
 
 
         # Contenedor (Registrar admin) y cards 
-        self.contenedor_btn = tk.Frame(self.contenedor_titulo, bg="#242427")
+        self.contenedor_btn = tk.Frame(self.contenedor_titulo, bg="#1A1A1E")
         self.contenedor_btn.pack(side="right")
 
         # Fila de stat cards
-        fila_stats = tk.Frame(self.contenedor_btn, bg="#242427",)
+        fila_stats = tk.Frame(self.contenedor_btn, bg="#1A1A1E",)
         fila_stats.pack(side="left")
 
         def crear_stat_card(parent, variable, etiqueta, color_num):
 
             card = ctk.CTkFrame(parent,
-                    fg_color="#111D29",
+                    fg_color="#242427",
                     border_color="#45A29E",
                     border_width=1,
                     corner_radius=10)
@@ -191,7 +192,7 @@ class GestionAdminVentana:
 
             ctk.CTkLabel(card,
                          text=etiqueta,
-                         text_color="#8BA5BE",
+                         text_color="#FFFFFF",
                          font=("Segoe UI", 13, "bold")).pack(padx=20, pady=(0, 10))
 
         crear_stat_card(fila_stats, self.contador_total,     "Total",     "#79FAF3")
@@ -217,17 +218,24 @@ class GestionAdminVentana:
 
         # Línea divisora
         self.linea_divisor = tk.Frame(self.ventana, bg="#45A29E", height=2)
-        self.linea_divisor.pack(fill="x", pady=(12, 30))
+        self.linea_divisor.pack(fill="x")
         # ==========================================================================
 
 
         # ==========================================================================
         # CONFIGURACION DE LA TABLA ADMINS
         # ==========================================================================
+        self.contenedor_cuerpo_tabla = tk.Frame(self.ventana, bg="#1A1A1E")
+        self.contenedor_cuerpo_tabla.pack(fill="both", expand=True)
 
         # Cabecera de la tabla
-        self.header_tabla = tk.Frame(self.ventana, bg="#0A1520", height=45) 
-        self.header_tabla.pack(fill="x", pady=(12, 0), padx=110)
+        self.header_tabla = ctk.CTkFrame(self.contenedor_cuerpo_tabla,
+                                        fg_color="#0A1520",
+                                        # border_color="#45A29E",
+                                        # border_width=2,
+                                        # corner_radius=5,
+                                        height=45) 
+        self.header_tabla.pack(fill="x", pady=(30, 0), padx=200, )
         self.header_tabla.pack_propagate(False)
 
         COLS = [
@@ -252,13 +260,15 @@ class GestionAdminVentana:
 
         # Contenedor scrollable para las filas
         self.contenedor_tabla = ctk.CTkScrollableFrame(
-            self.ventana,
-            fg_color="#111C28",
-            corner_radius=0,
+            self.contenedor_cuerpo_tabla,
+            fg_color="#2D2D31",
+            # corner_radius=5,
+            # border_color="#45A29E",
+            # border_width=1,
             scrollbar_button_color="#DADADA",
             scrollbar_button_hover_color="#acacac"
         )
-        self.contenedor_tabla.pack(fill="both", expand=True, padx=110, pady=(0, 40))
+        self.contenedor_tabla.pack(fill="both", expand=True, padx=200, pady=(0, 40))
                 
         # Esta instancia de la clase GestionAdminControler me permite acceder al metodo de cargar tabla
         self.controlador_admin = GestionAdminController(self)
