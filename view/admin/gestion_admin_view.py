@@ -28,7 +28,7 @@ class GestionAdminVentana:
         self.header = tk.Frame(self.ventana,
                                 bg="#45A29E",)
         self.header.pack(side="top",
-                          fill="x") # Mantiene el 100% del ancho en la pantalla
+                          fill="x", ipady=2) # Mantiene el 100% del ancho en la pantalla
         
         # Se crea un boton que contenga la imagen del logo que permita volver hacia atras
         self.image_logo = tk.PhotoImage(file="image/logotipo.png").subsample(2, 2)
@@ -80,51 +80,54 @@ class GestionAdminVentana:
 
         # El Label debe coincidir con el tamaño resultante
         image_avatar = tk.Label(self.header,
-                                bg="#45A29E", 
-                                image=self.image_avatar,)
+                                 bg="#45A29E", 
+                                  image=self.image_avatar,)
         image_avatar.image = self.image_avatar
         image_avatar.pack(side="right", padx=(0,20))
 
+
         # Este contenedor permitira acomodar dos Label arriba y abajo
         self.container_usuario = tk.Frame(self.header,
-                                        bg="#45A29E")
+                                           bg="#45A29E")
         self.container_usuario.pack(side="right", padx=20)
         
-        # Etiqueta "Administrador" parte superior
-        if datos_usuario["sexo"] == "Masculino":
-            tk.Label(self.container_usuario,
-                    text="Administrador",
+        # Nombre del usuario en la parte izquierda
+        tk.Label(self.container_usuario,
+                   text=f"{datos_usuario['nombre']} {datos_usuario["apellido"]}",
                     bg="#45A29E",
-                    fg="white",
-                    font=("Segoe UI", 15, "bold")).pack(side="top", anchor="e")
-        else:
-            tk.Label(self.container_usuario,
-                    text="Administradora",
-                    bg="#45A29E",
-                    fg="white",
-                    font=("Segoe UI", 14, "bold")).pack(side="top", anchor="e")
+                     fg="white", 
+                      font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
         
         # Contenedor que organiza el nombre del usuario y el boton de manera horizontal
         self.fila_nombre = tk.Frame(self.container_usuario,
-                                    bg="#45A29E")
+                                     bg="#45A29E")
         self.fila_nombre.pack(side="top", anchor="e")
         
-        # Nombre del usuario en la parte izquierda
-        tk.Label(self.fila_nombre,
-                text=f"{datos_usuario['nombre']} {datos_usuario["apellido"]}    | ",
-                bg="#45A29E",
-                fg="white", 
-                font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
+
+        # Etiqueta "Administrador" parte superior
+        if datos_usuario["sexo"] == "Masculino":
+            tk.Label(self.fila_nombre,
+                     text="Administrador",
+                      bg="#45A29E",
+                      fg="white",
+                       font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
+        else:
+            tk.Label(self.fila_nombre,
+                     text="Administradora",
+                      bg="#45A29E",
+                      fg="white",
+                       font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
+        
         
         # Botón Cerrar Sesión (Al lado del nombre)
         self.btn_cerrar_sesion = tk.Button(self.fila_nombre, 
-                                            text="Cerrar sesión", 
-                                            bg="#45A29E", 
-                                            fg="white",
-                                            font=("Segoe UI", 13, "bold"),                                                  
-                                            borderwidth=0,
-                                            cursor="hand2",
-                                            command= lambda:GestionAdminController.cerrar_sesion(ventana) # Cambia el cursor al pasar por encima
+                                            text="|  Cerrar sesión", 
+                                             bg="#45A29E", 
+                                                fg="white",
+                                                 font=("Segoe UI", 12, "bold"),                                                  
+                                                  borderwidth=0,
+                                                   cursor="hand2",
+                                                    command= lambda:GestionAdminController.cerrar_sesion(self.ventana) # Cambia el cursor al pasar por encima
                                            )
         self.btn_cerrar_sesion.pack(side="left")
         # ===========================================================================
@@ -149,22 +152,21 @@ class GestionAdminVentana:
                 text="PANEL DE CONTRO",
                 # textvariable= self.contador_masculino, 
                 fg="#45A29E", 
-                
                 bg="#1A1A1E", 
                 font=("Segoe UI", 15, "bold")).pack(side="top", anchor="w")
 
-        # Título (Administradores registrados)
-        tk.Label(self.contenedor_titulo_separado, 
-                text="Administradores registrados", 
-                fg="white", 
-                bg="#1A1A1E", 
-                font=("Segoe UI", 13, "bold")).pack(side="top", anchor="w")
+        # # Título (Administradores registrados)
+        # tk.Label(self.contenedor_titulo_separado, 
+        #         text="Administradores registrados", 
+        #         fg="white", 
+        #         bg="#1A1A1E", 
+        #         font=("Segoe UI", 13, "bold")).pack(side="top", anchor="w")
 
         tk.Label(self.contenedor_titulo_separado, 
                 text="En este apartado podras crear, editar o eliminar cuentas de acceso al sistema", 
                 fg="white", 
                 bg="#1A1A1E",  
-                font=("Segoe UI", 13)).pack(side="top", anchor="w", pady=(12,0))
+                font=("Segoe UI", 13)).pack(side="top", anchor="w")
 
 
         # Contenedor (Registrar admin) y cards 
@@ -178,7 +180,7 @@ class GestionAdminVentana:
         def crear_stat_card(parent, variable, etiqueta, color_num):
 
             card = ctk.CTkFrame(parent,
-                    fg_color="#242427",
+                    fg_color="#232325",
                     border_color="#45A29E",
                     border_width=1,
                     corner_radius=10)
@@ -195,9 +197,9 @@ class GestionAdminVentana:
                          text_color="#FFFFFF",
                          font=("Segoe UI", 13, "bold")).pack(padx=20, pady=(0, 10))
 
-        crear_stat_card(fila_stats, self.contador_total,     "Total",     "#79FAF3")
-        crear_stat_card(fila_stats, self.contador_masculino, "Masculino", "#4DC7FF")
-        crear_stat_card(fila_stats, self.contador_femenino,  "Femenino",  "#EE8AFF")
+        crear_stat_card(fila_stats, self.contador_total,     "Total",     "#45A29E")
+        crear_stat_card(fila_stats, self.contador_masculino, "Masculino", "#45A29E")
+        crear_stat_card(fila_stats, self.contador_femenino,  "Femenino",  "#45A29E")
 
         # Botón registrar (text fijo, nunca textvariable)
         self.btn_crear_admin = ctk.CTkButton(
@@ -261,7 +263,7 @@ class GestionAdminVentana:
         # Contenedor scrollable para las filas
         self.contenedor_tabla = ctk.CTkScrollableFrame(
             self.contenedor_cuerpo_tabla,
-            fg_color="#2D2D31",
+            fg_color="#232325",
             # corner_radius=5,
             # border_color="#45A29E",
             # border_width=1,
