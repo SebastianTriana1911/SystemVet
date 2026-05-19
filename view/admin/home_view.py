@@ -116,7 +116,7 @@ class HomeVentana():
 
 
         cuerpo = tk.Frame(self.ventana, bg="#242424")
-        cuerpo.pack(fill="both", expand=True, padx=55, pady=30)
+        cuerpo.pack(fill="both", expand=True, padx=155, pady=30)
 
         tk.Label(cuerpo, text="Gestión de información", bg="#242424", fg="white",
                  font=("Segoe UI", 20, "bold")).pack(anchor="w")
@@ -124,7 +124,7 @@ class HomeVentana():
         tk.Label(cuerpo,
                  text="Seleccione un módulo para administrar el personal y revisar las estadísticas clínicas.\n"
                       "Asegúrese de mantener los registros actualizados.",
-                 bg="#242424", fg="#9090a8", font=("Segoe UI", 12), justify="left").pack(anchor="w", pady=(5, 0))
+                 bg="#242424", fg="white", font=("Segoe UI", 12), justify="left").pack(anchor="w", pady=(10, 25))
 
         # --- Contenedor de las tres opciones ---
         opciones = tk.Frame(cuerpo, bg="#242424")
@@ -141,11 +141,20 @@ class HomeVentana():
         # ========================================================================================================
 
         #borde_adm = tk.Frame(opciones, bg="#242424", padx=1, pady=1)
-        borde_adm = ctk.CTkFrame(opciones, fg_color="#1a1a1f", corner_radius=20)
-        borde_adm.grid(row=0, column=0, sticky="nsew", padx=(0, 14))
+        borde_adm = ctk.CTkFrame(opciones, 
+                                fg_color="#1a1a1f", 
+                                corner_radius=20,
+                                border_width=2, 
+                                border_color="#404040" 
+                                )
+        borde_adm.grid(row=0, 
+                        column=0,
+                            sticky="new", 
+                            padx=(0, 14))
 
-        opcion_administrador = ctk.CTkFrame(borde_adm, fg_color="#1a1a1f")
-        opcion_administrador.pack(fill="both", expand=True, padx=20, pady=200)
+        opcion_administrador = ctk.CTkFrame(borde_adm, 
+                                          fg_color="#1a1a1f")
+        opcion_administrador.pack(fill="both", expand=False, padx=20, pady=80)
 
         self.imageAvatarAdministrador = tk.PhotoImage(file="image/avatar_administrador.png")
         tk.Label(opcion_administrador, bg="#1a1a1f", image=self.imageAvatarAdministrador,
@@ -155,21 +164,20 @@ class HomeVentana():
                  font=("Segoe UI", 13, "bold")).pack(pady=(10, 0))
 
         tk.Label(opcion_administrador,
-                 text="Gestione cuentas con acceso total al sistema, "
-                      "configuraciones de la clínica y permisos de seguridad del personal.",
-                 bg="#1a1a1f", fg="#9090a8", font=("Segoe UI",11),
-                 justify="center", wraplength=230).pack(pady=(8, 40))
+                 text="En este apartado podra gestionar usuarios con permisos de administracion para acceder al sistema.",
+                 bg="#1a1a1f", fg="white", font=("Segoe UI",11),
+                 justify="center", wraplength=300).pack(pady=(8, 40))
 
         self.btn_adm = ctk.CTkButton(opcion_administrador,
                                  text="INGRESAR  →",
                                  fg_color="#7c3aed", text_color="white",
                                  font=("Segoe UI", 13, "bold"),
                                  hover_color="#6d28d9",
-                                 width=180, 
-                                 height=35, 
+                                 width=150, 
+                                 height=55, 
                                  corner_radius=10,
                                  command=lambda:HomeController(self.ventana, datos_usuario))
-        self.btn_adm.pack(fill="x")
+        self.btn_adm.pack(pady=20)
 
 
         # ========================================================================================================
@@ -177,12 +185,24 @@ class HomeVentana():
         # ========================================================================================================
 
 
-        borde_med = ctk.CTkFrame(opciones, fg_color="#1a1a1f", corner_radius=20)
+        borde_med = ctk.CTkFrame(opciones, 
+                                fg_color="#1a1a1f", 
+                                corner_radius=20,
+                                border_width=2, 
+                                border_color="#404040" 
+                                
+                                )
         #borde_med = tk.Frame(opciones, bg="#1a1a1f", padx=1, pady=1)
-        borde_med.grid(row=0, column=1, sticky="nsew", padx=(0, 14))
+        borde_med.grid(row=0, 
+                        column=1, 
+                        sticky="new", 
+                        padx=(0, 14))
 
-        opcion_medico = ctk.CTkFrame(borde_med, fg_color="#1a1a1f", width=24, height=200,  )
-        opcion_medico.pack(fill="both", expand=True, pady=200, padx=20)
+        opcion_medico = ctk.CTkFrame(borde_med, 
+                                    fg_color="#1a1a1f", 
+                                    width=24, 
+                                    height=200  )
+        opcion_medico.pack(fill="both", expand=False, pady=80, padx=20)
 
         self.imageAvatarMedico = tk.PhotoImage(file="image/avatar_medico.png")
         tk.Label(opcion_medico, bg="#1a1a1f", image=self.imageAvatarMedico,
@@ -194,19 +214,19 @@ class HomeVentana():
         tk.Label(opcion_medico,
                  text="Administre el personal veterinario, horarios, "
                       "especialidades clínicas y asignaciones de pacientes en curso.",
-                 bg="#1a1a1f", fg="#9090a8", font=("Segoe UI", 11),
-                 justify="center", wraplength=230).pack(pady=(8, 20))
+                 bg="#1a1a1f", fg="white", font=("Segoe UI", 11),
+                 justify="center", wraplength=300).pack(pady=(8,40))
 
         self.btn_med = ctk.CTkButton(opcion_medico, text="INGRESAR  →", 
                                  fg_color="#7c3aed", 
                                  font=("Segoe UI", 13, "bold"), 
-                                 width=180, 
-                                 height=35, 
+                                 width=150, 
+                                 height=55, 
                                  corner_radius=10,
                                  hover_color="#6d28d9", 
                                  text_color="white"
                                  )
-        self.btn_med.pack(fill="x")
+        self.btn_med.pack(pady=20)
 
         # ========================================================================================================
         # ────────────────────── REPORTES ────────────────────────────────────────────────────────────────────────
@@ -217,15 +237,16 @@ class HomeVentana():
         borde_rep = ctk.CTkFrame(opciones,
                                 fg_color="#1a1a1f",
                                 corner_radius=20, 
-                                height=200)
-        borde_rep.grid(row=0, column=2, sticky="nsew",padx=(0, 14))
+                                border_width=2, 
+                                 border_color="#404040")
+        borde_rep.grid(row=0, column=2, sticky="new",padx=(0, 14))
 
         opcion_reporte = ctk.CTkFrame(borde_rep,
                                         fg_color="#1a1a1f")
         opcion_reporte.pack(fill="both",
-                                expand=True,
+                                expand=False,
                                 padx=24,
-                                pady=200)
+                                pady=80)
 
         self.imageReporte = tk.PhotoImage(file="image/reporte.png")
         tk.Label(opcion_reporte, 
@@ -239,17 +260,17 @@ class HomeVentana():
         tk.Label(opcion_reporte,
                  text="Visualice análisis clínicos, estadísticas financieras y "
                       "rendimiento de la clínica mediante gráficos interactivos.",
-                 bg="#1a1a1f", fg="#9090a8", font=("Segoe UI", 11),
-                 justify="center", wraplength=230).pack(pady=(8, 35))
+                 bg="#1a1a1f", fg="white", font=("Segoe UI", 11),
+                 justify="center", wraplength=300).pack(pady=(8, 35))
 
         self.btn_rep = ctk.CTkButton(opcion_reporte, text="INGRESAR  →",
                                  fg_color="#7c3aed", text_color="white",
                                  font=("Segoe UI", 13, "bold"), 
-                                 width=180,
-                                 height=35,
+                                 width=150,
+                                 height=55,
                                  hover_color="#6d28d9", 
                                  corner_radius=10)
-        self.btn_rep.pack(fill="x")
+        self.btn_rep.pack(pady=20)
 
         # ----------------------------------------------------
 
