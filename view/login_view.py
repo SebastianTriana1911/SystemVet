@@ -24,7 +24,7 @@ class LoginVentana:
         self.ventana.config(bg="#1A1A1E",
                              bd=10) 
         
-
+        self.ventana.after(0, lambda: self.ventana.state('zoomed'))
         # ==========================================================================
         # CONFIGURACIÓN DEL HEADER (Nueva paleta Turquesa)
         # ==========================================================================

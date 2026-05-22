@@ -1,6 +1,6 @@
 import customtkinter as ctk
-from backend.admin.gestion_admin_controller import *
 from backend.admin.home_controller import *
+# from backend.admin.gestion_admin_controller import *
 import tkinter as tk
 class HomeVentana():
     def __init__(self, datos_usuario):
@@ -192,7 +192,7 @@ class HomeVentana():
                                  width=150, 
                                  height=55, 
                                  corner_radius=10,
-                                 command=lambda:HomeController(self.ventana, datos_usuario))
+                                 command=lambda:HomeController(self.ventana, datos_usuario, "Admin"))
         self.btn_adm.pack(pady=20)
 
 
@@ -217,7 +217,8 @@ class HomeVentana():
         opcion_medico = ctk.CTkFrame(borde_med, 
                                     fg_color="#242429", 
                                     width=24, 
-                                    height=200  )
+                                    height=200
+                                    )
         opcion_medico.pack(fill="both", expand=False, pady=80, padx=20)
 
         self.imageAvatarMedico = tk.PhotoImage(file="image/avatar_medico.png")
@@ -242,6 +243,8 @@ class HomeVentana():
                                  hover_color="#2D7773", 
                                  text_color="white",
                                  cursor="hand2",
+                                 command=lambda:HomeController(self.ventana, datos_usuario, "Medico")
+                                #  comman = lambda: HomeController(self.ventana, datos_usuario, "Medico") 
                                  )
         self.btn_med.pack(pady=20)
 

@@ -1,7 +1,7 @@
 {
     "2": {
         "nombre": "Ana Maria",
-        "apellido": "Gomez Perez",
+        "apellido": "Gomez Molina",
         "sexo": "Femenino",
         "telefono": "3154567890",
         "rol": "administrador",
@@ -30,5 +30,21 @@
         "telefono": "2345123422",
         "rol": "administrador",
         "password": "4"
+    },
+    "5": {
+        "nombre": "Alejandro",
+        "apellido": "Quiroga",
+        "sexo": "Masculino",
+        "telefono": "3214324211",
+        "rol": "administrador",
+        "password": "5"
+    },
+    "6": {
+        "nombre": "Alejandro",
+        "apellido": "Quiroga Cely",
+        "sexo": "Femenino",
+        "telefono": "3214879588",
+        "rol": "administrador",
+        "password": "6"
     }
 }
