@@ -16,11 +16,14 @@ class HomeController():
         if tipo_boton == "Admin":
             # Ejecutamos el método para cambiar de pantalla de una vez
             self.abrir_ventana_gestion_admin()
+
         elif tipo_boton == "Medico":
             self.abrir_ventana_gestion_medico()
+
         elif tipo_boton == "Reporte":
             pass
             # self.abrir_ventana_gestion_reporte()
+
         else:
             messagebox.showerror("Error de apertura de ventana", "Hubo un error al querer abrir la ventanta")
 
@@ -49,7 +52,7 @@ class HomeController():
 
         
         # Instanciamos la vista de gestión pasando la nueva raíz
-        GestionMedicoVentana(ventana_gestion_medico, self.datos_usuario)
+        GestionMedicosVentana(ventana_gestion_medico, self.datos_usuario)
 
         ventana_gestion_medico.mainloop()
         

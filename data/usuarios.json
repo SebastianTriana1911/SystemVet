@@ -46,5 +46,65 @@
         "telefono": "3214879588",
         "rol": "administrador",
         "password": "6"
+    },
+    "11111111": {
+        "nombre": "Jorge Andres",
+        "apellido": "Moreno Camacho",
+        "sexo": "Masculino",
+        "telefono": "3212132322",
+        "especialidad": "Cirugía",
+        "rol": "medico",
+        "estado": "Inactivo",
+        "password": "1"
+    },
+    "222222222": {
+        "nombre": "Paula Andrea",
+        "apellido": "Camacho Barrera",
+        "sexo": "Femenino",
+        "telefono": "3217894511",
+        "especialidad": "Dermatología",
+        "rol": "medico",
+        "estado": "Activo",
+        "password": "1"
+    },
+    "333333333": {
+        "nombre": "Andres Felipe",
+        "apellido": "Ortega Ruiz",
+        "sexo": "Masculino",
+        "telefono": "3217894511",
+        "especialidad": "Medicina General",
+        "rol": "medico",
+        "estado": "Activo",
+        "password": "1"
+    },
+    "444444444": {
+        "nombre": "Ana Maria",
+        "apellido": "Gomez Molina",
+        "sexo": "Femenino",
+        "telefono": "3217894511",
+        "especialidad": "Ortopedia",
+        "rol": "medico",
+        "estado": "Activo",
+        "password": "1"
+    },
+    "555555555": {
+        "nombre": "Nicolas",
+        "apellido": "Gomez Molina",
+        "sexo": "Masculino",
+        "telefono": "321213223",
+        "especialidad": "Oftalmología",
+        "rol": "medico",
+        "estado": "Activo",
+        "password": "1"
+    },
+    "666666666": {
+        "nombre": "Juan Sebastian",
+        "apellido": "Sterling Moreno",
+        "sexo": "Masculino",
+        "telefono": "3231232233",
+        "especialidad": "Ortopedia",
+        "rol": "medico",
+        "estado": "Inactivo",
+        "password": "1"
     }
 }

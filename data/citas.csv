@@ -1,0 +1,3 @@
+id_cita,id_medico,nombre_paciente,nombre_propietario,tipo_animal,raza,fecha,hora,tipo_servicio,motivo,estado
+C001,222222222,Rocky,Carlos Ruiz,Perro,Labrador,2026-05-20,10:00,Consulta,Vacunación anual,Pendiente
+C002,444444444,Rocky,Carlos Ruiz,Perro,Labrador,2026-05-20,10:00,Consulta,Vacunación anual,Pendiente

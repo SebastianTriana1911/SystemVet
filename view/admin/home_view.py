@@ -14,8 +14,8 @@ class HomeVentana():
         self.ventana = ctk.CTk()
         ctk.set_appearance_mode("dark")
         self.ventana.iconbitmap("image/huella_icono.ico") # Se muesta en ventana un icono
-        self.ventana.title("SystemVet / Gestión de Administradores")
-        self.ventana.configure(bg="black", bd=10)
+        self.ventana.title("SystemVet - Gestión de Administradores")
+        self.ventana.configure(bg="black", bd=0)
 
 
         self.ventana.after(0, lambda: self.ventana.state('zoomed'))
@@ -37,7 +37,7 @@ class HomeVentana():
                                   bg="#45A29E",
                                   width=70,
                                   height=70,
-                                    image=self.image_logo)
+                                  image=self.image_logo)
         image_logo.image = self.image_logo
         image_logo.pack(side="left", padx=20, pady=10)
 
@@ -100,26 +100,26 @@ class HomeVentana():
         if datos_usuario["sexo"] == "Masculino":
             tk.Label(self.fila_nombre,
                      text="Administrador",
-                      bg="#45A29E",
-                      fg="white",
-                       font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
+                     bg="#45A29E",
+                     fg="white",
+                     font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
         else:
             tk.Label(self.fila_nombre,
                      text="Administradora",
-                      bg="#45A29E",
-                      fg="white",
-                       font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
+                     bg="#45A29E",
+                     fg="white",
+                     font=("Segoe UI", 13)).pack(side="left", padx=(0, 5))
         
         
         # Botón Cerrar Sesión (Al lado del nombre)
         self.btn_cerrar_sesion = tk.Button(self.fila_nombre, 
                                             text="|  Cerrar sesión", 
-                                             bg="#45A29E", 
-                                                fg="white",
-                                                 font=("Segoe UI", 12, "bold"),                                                  
-                                                  borderwidth=0,
-                                                   cursor="hand2",
-                                                    command= lambda:GestionAdminController.cerrar_sesion(self.ventana) # Cambia el cursor al pasar por encima
+                                            bg="#45A29E", 
+                                            fg="white",
+                                            font=("Segoe UI", 12, "bold"),                                                  
+                                            borderwidth=0,
+                                            cursor="hand2",
+                                            command= lambda:GestionAdminController.cerrar_sesion(self.ventana) # Cambia el cursor al pasar por encima
                                            )
         self.btn_cerrar_sesion.pack(side="left")
         # ----------------------------------------------------
@@ -244,7 +244,6 @@ class HomeVentana():
                                  text_color="white",
                                  cursor="hand2",
                                  command=lambda:HomeController(self.ventana, datos_usuario, "Medico")
-                                #  comman = lambda: HomeController(self.ventana, datos_usuario, "Medico") 
                                  )
         self.btn_med.pack(pady=20)
 
