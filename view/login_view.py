@@ -8,6 +8,7 @@ from customtkinter import *
 from tkinter import messagebox
 from backend.login_controller import *
 from view.admin.home_view import *
+from view.medicos.home_medico import *
 
 
 # Configuracion de la ventana login 
@@ -152,9 +153,14 @@ class LoginVentana:
                 self.ventana.destroy() 
                 ventana_home_admin = HomeVentana(datos_usuario) 
                 # ventana_home_admin.mainloop() 
+            elif resultado == "medico":
+                self.ventana.destroy() 
+                ventana_home_medico = HomeMedico(datos_usuario) 
+                # ventana_home_medico.mainloop()
             else:
-                pass 
-        else:
+                print("Error")
+
+        else:        
             messagebox.showerror("Credenciales incorrectas", resultado) 
             if resultado == "Contraseña incorrecta":
                 self.ent_pass.delete(0, tk.END) 

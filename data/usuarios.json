@@ -69,7 +69,7 @@
         "estado": "Activo",
         "password": "sandra_dermato"
     },
-    "1547789558": {
+    "2": {
         "nombre": "Diego Fernando",
         "apellido": "Castaño Henao",
         "sexo": "Masculino",
@@ -77,7 +77,7 @@
         "especialidad": "Cardiología",
         "rol": "medico",
         "estado": "Activo",
-        "password": "diego_cardio1"
+        "password": "2"
     },
     "1019874114": {
         "nombre": "Johan Sebastian",
