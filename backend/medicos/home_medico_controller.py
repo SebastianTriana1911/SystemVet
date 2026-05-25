@@ -1,11 +1,11 @@
 # Clase que crea la nueva vista
-from view.medico.crear_cita_view import CrearCitaView
-from view.medico.consultar_citas_view import ConsultarCitasView
+from view.medicos.crear_citas_medico import VentanaCrearCita
+from view.medicos.consultar_citas_medico import VentanaConsultarCitas
 from tkinter import messagebox
 import customtkinter as ctk
 
-class HomeController():
-    def _init_(self, ventana_home_medico, datos_usuario, tipo_boton):
+class HomeControllerMedicos():  
+    def __init__(self, ventana_home_medico, datos_usuario, tipo_boton):
         self.ventana_home_medico = ventana_home_medico
         self.datos_usuario = datos_usuario
         self.tipo_boton = tipo_boton
@@ -21,14 +21,8 @@ class HomeController():
 
     def abrir_ventana_crear_cita(self):
         self.ventana_home_medico.destroy()
-        ventana_crear_cita = ctk.CTk()
-        ventana_crear_cita.after(0, lambda: ventana_crear_cita.state('zoomed'))
-        CrearCitaView(ventana_crear_cita, self.datos_usuario)
-        ventana_crear_cita.mainloop()
+        VentanaCrearCita(self.datos_usuario)
 
     def abrir_ventana_consultar_cita(self):
         self.ventana_home_medico.destroy()
-        ventana_consultar = ctk.CTk()
-        ventana_consultar.after(0, lambda: ventana_consultar.state('zoomed'))
-        ConsultarCitasView(ventana_consultar, self.datos_usuario, modo="Pendiente")
-        ventana_consultar.mainloop()
+        VentanaConsultarCitas(self.datos_usuario)
