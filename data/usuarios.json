@@ -1,12 +1,4 @@
 {
-    "2": {
-        "nombre": "Ana Maria",
-        "apellido": "Gomez Molina",
-        "sexo": "Femenino",
-        "telefono": "3154567890",
-        "rol": "administrador",
-        "password": "2"
-    },
     "1": {
         "nombre": "Johan Sebastian",
         "apellido": "Triana Camacho",
@@ -15,96 +7,86 @@
         "rol": "administrador",
         "password": "1"
     },
-    "3": {
-        "nombre": "Yolanda",
-        "apellido": "Camacho Barrara",
+    "1032234553": {
+        "nombre": "Carlos Alberto",
+        "apellido": "Restrepo Hoyos",
+        "sexo": "Masculino",
+        "telefono": "3104829103",
+        "rol": "administrador",
+        "password": "passwordCarlos3"
+    },
+    "1247895442": {
+        "nombre": "Luisa Fernanda",
+        "apellido": "Bermúdez Castro",
         "sexo": "Femenino",
-        "telefono": "3214324323",
+        "telefono": "3217654321",
         "rol": "administrador",
-        "password": "3"
+        "password": "luisa*2026*secure"
     },
-    "4": {
-        "nombre": "Nicolas Felipe",
-        "apellido": "Torres Niño",
+    "1478965447": {
+        "nombre": "Juan Camilo",
+        "apellido": "Rodríguez Palacios",
         "sexo": "Masculino",
-        "telefono": "2345123422",
+        "telefono": "3158901234",
         "rol": "administrador",
-        "password": "4"
+        "password": "jc_rodriguez_98"
     },
-    "5": {
-        "nombre": "Alejandro",
-        "apellido": "Quiroga",
-        "sexo": "Masculino",
-        "telefono": "3214324211",
-        "rol": "administrador",
-        "password": "5"
-    },
-    "6": {
-        "nombre": "Alejandro",
-        "apellido": "Quiroga Cely",
+    "1047158665": {
+        "nombre": "Diana Marcela",
+        "apellido": "Gutiérrez Ángel",
         "sexo": "Femenino",
-        "telefono": "3214879588",
+        "telefono": "3004561234",
         "rol": "administrador",
-        "password": "6"
+        "password": "admin_diana_secure"
     },
-    "11111111": {
-        "nombre": "Jorge Andres",
-        "apellido": "Moreno Camacho",
-        "sexo": "Masculino",
-        "telefono": "3212132322",
-        "especialidad": "Cirugía",
+    "1474159998": {
+        "nombre": "Carolina",
+        "apellido": "Zuluaga Martínez",
+        "sexo": "Femenino",
+        "telefono": "3115647382",
+        "especialidad": "Pediatría",
         "rol": "medico",
-        "estado": "Inactivo",
-        "password": "1"
+        "estado": "Activo",
+        "password": "pass_caro_ped"
     },
-    "222222222": {
-        "nombre": "Paula Andrea",
-        "apellido": "Camacho Barrera",
+    "1013258774": {
+        "nombre": "Alejandro",
+        "apellido": "Villamizar Peña",
+        "sexo": "Masculino",
+        "telefono": "3182940192",
+        "especialidad": "Medicina Interna",
+        "rol": "medico",
+        "estado": "Activo",
+        "password": "alejo_med_int"
+    },
+    "1047789998": {
+        "nombre": "Sandra Milena",
+        "apellido": "Ochoa Aristizábal",
         "sexo": "Femenino",
-        "telefono": "3217894511",
+        "telefono": "3147253649",
         "especialidad": "Dermatología",
         "rol": "medico",
         "estado": "Activo",
-        "password": "1"
+        "password": "sandra_dermato"
     },
-    "333333333": {
-        "nombre": "Andres Felipe",
-        "apellido": "Ortega Ruiz",
+    "1547789558": {
+        "nombre": "Diego Fernando",
+        "apellido": "Castaño Henao",
         "sexo": "Masculino",
-        "telefono": "3217894511",
-        "especialidad": "Medicina General",
+        "telefono": "3016482930",
+        "especialidad": "Cardiología",
         "rol": "medico",
         "estado": "Activo",
-        "password": "1"
+        "password": "diego_cardio1"
     },
-    "444444444": {
-        "nombre": "Ana Maria",
-        "apellido": "Gomez Molina",
-        "sexo": "Femenino",
-        "telefono": "3217894511",
-        "especialidad": "Ortopedia",
+    "1019874114": {
+        "nombre": "Johan Sebastian",
+        "apellido": "Triana Camacho",
+        "sexo": "Masculino",
+        "telefono": "3213213244",
+        "especialidad": "Cirugía",
         "rol": "medico",
         "estado": "Activo",
-        "password": "1"
-    },
-    "555555555": {
-        "nombre": "Nicolas",
-        "apellido": "Gomez Molina",
-        "sexo": "Masculino",
-        "telefono": "321213223",
-        "especialidad": "Oftalmología",
-        "rol": "medico",
-        "estado": "Activo",
-        "password": "1"
-    },
-    "666666666": {
-        "nombre": "Juan Sebastian",
-        "apellido": "Sterling Moreno",
-        "sexo": "Masculino",
-        "telefono": "3231232233",
-        "especialidad": "Ortopedia",
-        "rol": "medico",
-        "estado": "Inactivo",
         "password": "1"
     }
 }

@@ -361,7 +361,6 @@ class GestionAdminVentana:
                     height=30,
                     fg_color="#EC8600",
                     hover_color="#C77100",
-                    border_width=1,
                     text_color="#FFFFFF",
                     corner_radius=6,
                     cursor="hand2",

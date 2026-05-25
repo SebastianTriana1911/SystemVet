@@ -1,6 +1,5 @@
 import customtkinter as ctk
 from backend.admin.home_controller import *
-# from backend.admin.gestion_admin_controller import *
 import tkinter as tk
 class HomeVentana():
     def __init__(self, datos_usuario):
@@ -289,7 +288,8 @@ class HomeVentana():
                                  height=55,
                                  hover_color="#2D7773", 
                                  cursor="hand2",
-                                 corner_radius=10)
+                                 corner_radius=10,
+                                 command=lambda: HomeController(self.ventana, datos_usuario, "Reporte"))
         self.btn_rep.pack(pady=20)
 
         # ----------------------------------------------------

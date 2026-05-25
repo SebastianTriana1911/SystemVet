@@ -1,6 +1,7 @@
 # Clase que crea la nueva vista
 from view.admin.gestion_admin_view import * 
 from view.admin.gestion_medico_view import * 
+from view.admin.gestion_reporte_view import *
 from tkinter import messagebox
 import customtkinter as ctk
 
@@ -21,8 +22,7 @@ class HomeController():
             self.abrir_ventana_gestion_medico()
 
         elif tipo_boton == "Reporte":
-            pass
-            # self.abrir_ventana_gestion_reporte()
+            self.abrir_ventana_gestion_reporte()
 
         else:
             messagebox.showerror("Error de apertura de ventana", "Hubo un error al querer abrir la ventanta")
@@ -56,3 +56,16 @@ class HomeController():
 
         ventana_gestion_medico.mainloop()
         
+    def abrir_ventana_gestion_reporte(self):
+        # Cerramos la ventana Home, que es la que recibimos como parametro
+        self.ventana_home_admin.destroy()
+
+        # Creamos la nueva raíz para la gestión
+        ventana_gestion_reporte= ctk.CTk()
+        ventana_gestion_reporte.after(0, lambda: ventana_gestion_reporte.state('zoomed'))
+
+        
+        # Instanciamos la vista de gestión pasando la nueva raíz
+        ReportesVentana(ventana_gestion_reporte, self.datos_usuario)
+
+        ventana_gestion_reporte.mainloop()

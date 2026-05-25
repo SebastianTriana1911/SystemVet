@@ -1,0 +1,4 @@
+id_cita,id_medico,tipo_animal,fecha,motivo,estado
+101,303030,Perro,2026-04-15,Vacunación,Completada
+102,404040,Gato,2026-05-10,Cirugía,Completada
+103,303030,Perro,2026-05-23,Consulta General,Completada

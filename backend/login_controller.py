@@ -16,7 +16,7 @@ class LoginController:
     # ==========================================================================
     def obtener_usuarios(self):
         # Abrir archivo en forma de lectura con el apostrofe "r" 
-        with open(self.archivo, 'r') as f:
+        with open(self.archivo, 'r', encoding='utf-8') as f:
             return json.load(f)
         
     def validar_login(self, nit_ingresado, pass_ingresado):
