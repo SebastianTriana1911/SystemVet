@@ -501,7 +501,7 @@ class HomeMedico():
         acciones_frame.pack(side="top", fill="both", padx=20, pady=(0, 20))
         
         # Frame para tareas  
-        tareas_frame = ctk.CTkFrame(acciones_frame,
+        tareas_frame = ctk.CTkScrollableFrame(acciones_frame,
                                     fg_color="#2a2a2a",
                                     corner_radius=15)
         tareas_frame.pack(side="top", fill="both", expand=True, padx=10, pady=(10, 10))     
