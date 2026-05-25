@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import tkinter as tk
+from backend.medicos.home_medico_controller import *
 class HomeMedico():
     def _guardar_notas(self):
         """Guarda las notas en un archivo JSON"""
@@ -185,6 +186,7 @@ class HomeMedico():
                                                  font=("Segoe UI", 12, "bold"),                                                  
                                                   borderwidth=0,
                                                    cursor="hand2",
+                                                   command= lambda: HomeController.cerrar_sesion(self.ventana)
                                                    # command= lamb1150184811
                                                    # da:GestionAdminController.cerrar_sesion(self.ventana) # Cambia el cursor al pasar por encima
                                            )

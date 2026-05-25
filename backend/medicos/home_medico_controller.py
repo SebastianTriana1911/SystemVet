@@ -1,6 +1,6 @@
 # Clase que crea la nueva vista
-from view.medico.crear_cita_view import CrearCitaView
-from view.medico.consultar_citas_view import ConsultarCitasView
+# from view.medico.crear_cita_view import CrearCitaView
+# from view.medico.consultar_citas_view import ConsultarCitasView
 from tkinter import messagebox
 import customtkinter as ctk
 
@@ -23,12 +23,19 @@ class HomeController():
         self.ventana_home_medico.destroy()
         ventana_crear_cita = ctk.CTk()
         ventana_crear_cita.after(0, lambda: ventana_crear_cita.state('zoomed'))
-        CrearCitaView(ventana_crear_cita, self.datos_usuario)
+        # CrearCitaView(ventana_crear_cita, self.datos_usuario)
         ventana_crear_cita.mainloop()
 
     def abrir_ventana_consultar_cita(self):
         self.ventana_home_medico.destroy()
         ventana_consultar = ctk.CTk()
         ventana_consultar.after(0, lambda: ventana_consultar.state('zoomed'))
-        ConsultarCitasView(ventana_consultar, self.datos_usuario, modo="Pendiente")
+        # ConsultarCitasView(ventana_consultar, self.datos_usuario, modo="Pendiente")
         ventana_consultar.mainloop()
+
+    def cerrar_sesion(ventana_actual):
+        respuesta = messagebox.askyesno("Cierre de sesión", "¿Está seguro de cerrar la sesión?")
+        if respuesta:
+            ventana_actual.destroy()
+            from main import iniciar_app
+            iniciar_app()    
