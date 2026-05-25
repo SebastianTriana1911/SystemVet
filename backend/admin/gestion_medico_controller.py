@@ -10,7 +10,7 @@ import tkinter as tk
 # UTILIDAD: leer CSV siempre limpio (sin espacios iniciales en valores/columnas)
 # =============================================================================
 def _leer_csv(ruta):
-    df = pd.read_csv(ruta, skipinitialspace=True, dtype={"id_medico": str, "id_cita": str})
+    df = pd.read_csv(ruta, sep=";", skipinitialspace=True, dtype={"id_medico": str, "id_cita": str})
     df.columns = df.columns.str.strip()
     df = df.apply(lambda col: col.map(lambda x: x.strip() if isinstance(x, str) else x))
     return df
@@ -24,7 +24,7 @@ class GestionMedicosController:
     def __init__(self, vista):
         self.vista = vista
         self.archivo_usuarios = "data/usuarios.json"
-        self.archivo_citas    = "data/citas.csv"
+        self.archivo_citas    = "data/citas_registradas.csv"
 
         # Estado interno del médico activo en el panel lateral
         self._nit_medico_activo    = None
@@ -257,7 +257,7 @@ class GestionMedicosController:
                 print(f"DEBUG masiva → filas que matchean: {cantidad}")
 
                 df.loc[mask, "id_medico"] = str(nit_destino).strip()
-                df.to_csv(self.archivo_citas, index=False)
+                df.to_csv(self.archivo_citas, index=False, sep=";")
                 messagebox.showinfo("Reasignación masiva",
                     f"Se reasignaron {cantidad} cita(s) correctamente.")
 
@@ -276,7 +276,7 @@ class GestionMedicosController:
                     return
 
                 df.loc[mask, "id_medico"] = str(nit_destino).strip()
-                df.to_csv(self.archivo_citas, index=False)
+                df.to_csv(self.archivo_citas, index=False, sep=";")
                 messagebox.showinfo("Cita reasignada", "La cita fue reasignada correctamente.")
 
             # Refrescar panel y cards
@@ -362,7 +362,7 @@ class GestionMedicosController:
                 mask = (df["id_medico"].astype(str) == str(nit)) & \
                        (df["estado"].isin(["Pendiente", "En curso"]))
                 df.loc[mask, "id_medico"] = nit_destino
-                df.to_csv(self.archivo_citas, index=False)
+                df.to_csv(self.archivo_citas, index=False, sep=";")
 
                 with open(self.archivo_usuarios, "r", encoding="utf-8") as f:
                     usuarios = json.load(f)

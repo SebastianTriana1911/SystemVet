@@ -49,7 +49,7 @@ def _estilo_dark(ax, fig):
 class ReportesController:
     def __init__(self, vista):
         self.vista            = vista
-        self.archivo_citas    = "data/citas.csv"
+        self.archivo_citas    = "data/citas_registradas.csv"
         self.archivo_usuarios = "data/usuarios.json"
         self._fig_actual      = None
 
@@ -136,7 +136,7 @@ class ReportesController:
     # ==========================================================================
     def _cargar_csv(self):
         try:
-            df = pd.read_csv(self.archivo_citas, skipinitialspace=True)
+            df = pd.read_csv(self.archivo_citas, sep=";", skipinitialspace=True)
             df.columns = df.columns.str.strip()
             df = df.apply(
                 lambda col: col.map(lambda x: x.strip() if isinstance(x, str) else x)

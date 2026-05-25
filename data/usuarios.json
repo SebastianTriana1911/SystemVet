@@ -88,5 +88,15 @@
         "rol": "medico",
         "estado": "Activo",
         "password": "1"
+    },
+    "22": {
+        "nombre": "prueba",
+        "apellido": "prueba",
+        "sexo": "Masculino",
+        "telefono": "234234",
+        "especialidad": "Medicina General",
+        "rol": "medico",
+        "estado": "Activo",
+        "password": "22"
     }
 }

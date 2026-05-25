@@ -28,6 +28,9 @@ class LoginController:
 
             # Verificamos contraseña
             if datos_usuario["password"] == pass_ingresado:
+                # Agregamos el NIT / usuario al diccionario de datos del usuario
+                datos_usuario["nit"] = nit_ingresado
+                datos_usuario["id_medico"] = nit_ingresado
                 # Retornamos si la validacion fue exitosa, el rol del usuario y el nombre
                 return True, datos_usuario["rol"], datos_usuario
             else:

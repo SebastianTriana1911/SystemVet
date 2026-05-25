@@ -1,11 +1,16 @@
 # Clase que crea la nueva vista
-# from view.medico.crear_cita_view import CrearCitaView
-# from view.medico.consultar_citas_view import ConsultarCitasView
+
+from view.medicos.crear_citas_medico import VentanaCrearCita
+from view.medicos.consultar_citas_medico import VentanaConsultarCitas
+
+from view.medicos.crear_citas_medico import VentanaCrearCita
+from view.medicos.consultar_citas_medico import VentanaConsultarCitas
+
 from tkinter import messagebox
 import customtkinter as ctk
 
-class HomeController():
-    def _init_(self, ventana_home_medico, datos_usuario, tipo_boton):
+class HomeControllerMedicos():  
+    def __init__(self, ventana_home_medico, datos_usuario, tipo_boton):
         self.ventana_home_medico = ventana_home_medico
         self.datos_usuario = datos_usuario
         self.tipo_boton = tipo_boton
@@ -19,18 +24,29 @@ class HomeController():
         else:
             messagebox.showerror("Error de apertura de ventana", "Hubo un error al querer abrir la ventana")
 
+    # def abrir_ventana_crear_cita(self):
+    #     self.ventana_home_medico.destroy()
+    #     ventana_crear_cita = ctk.CTk()
+    #     ventana_crear_cita.after(0, lambda: ventana_crear_cita.state('zoomed'))
+    #     VentanaCrearCita(self.datos_usuario)
+    #     ventana_crear_cita.mainloop()
+
     def abrir_ventana_crear_cita(self):
+        # 1. Cerramos la ventana actual del Home
         self.ventana_home_medico.destroy()
-        ventana_crear_cita = ctk.CTk()
-        ventana_crear_cita.after(0, lambda: ventana_crear_cita.state('zoomed'))
-        # CrearCitaView(ventana_crear_cita, self.datos_usuario)
-        ventana_crear_cita.mainloop()
+        
+        # 2. Instanciamos la vista pasándole ÚNICAMENTE los datos del usuario
+        # (El constructor de VentanaCrearCita se encargará de crear el ctk.CTk() interno)
+        nueva_ventana = VentanaCrearCita(self.datos_usuario)
+        
+        # 3. Arrancamos el bucle de la ventana que se creó dentro de la clase
+        nueva_ventana.ventana.mainloop()
 
     def abrir_ventana_consultar_cita(self):
         self.ventana_home_medico.destroy()
         ventana_consultar = ctk.CTk()
         ventana_consultar.after(0, lambda: ventana_consultar.state('zoomed'))
-        # ConsultarCitasView(ventana_consultar, self.datos_usuario, modo="Pendiente")
+        VentanaConsultarCitas(ventana_consultar, self.datos_usuario, modo="Pendiente")
         ventana_consultar.mainloop()
 
     def cerrar_sesion(ventana_actual):
@@ -39,3 +55,8 @@ class HomeController():
             ventana_actual.destroy()
             from main import iniciar_app
             iniciar_app()    
+        VentanaCrearCita(self.datos_usuario)
+
+    def abrir_ventana_consultar_cita(self):
+        self.ventana_home_medico.destroy()
+        VentanaConsultarCitas(self.datos_usuario)

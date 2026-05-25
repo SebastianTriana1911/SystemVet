@@ -1,7 +1,16 @@
+from backend.medicos.home_medico_controller import HomeControllerMedicos
 import customtkinter as ctk
 import tkinter as tk
 from backend.medicos.home_medico_controller import *
 class HomeMedico():
+    def cerrar_sesion(self):
+        from tkinter import messagebox
+        respuesta = messagebox.askyesno("Cierre de sesión", "¿Está seguro de cerrar la sesión?")
+        if respuesta:
+            self.ventana.destroy()
+            from main import iniciar_app
+            iniciar_app()
+
     def _guardar_notas(self):
         """Guarda las notas en un archivo JSON"""
         import json, os
@@ -161,7 +170,7 @@ class HomeMedico():
                        font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
         else:
             tk.Label(self.container_usuario,
-                     text="Administradora",
+                     text="Medica",
                       bg="#45A29E",
                       fg="white",
                        font=("Segoe UI", 13, "bold")).pack(side="top", anchor="e")
@@ -186,9 +195,10 @@ class HomeMedico():
                                                  font=("Segoe UI", 12, "bold"),                                                  
                                                   borderwidth=0,
                                                    cursor="hand2",
-                                                   command= lambda: HomeController.cerrar_sesion(self.ventana)
+                                                   command= lambda: HomeControllerMedicos.cerrar_sesion(self.ventana)
                                                    # command= lamb1150184811
                                                    # da:GestionAdminController.cerrar_sesion(self.ventana) # Cambia el cursor al pasar por encima
+
                                            )
         self.btn_cerrar_sesion.pack(side="left")
 
@@ -366,7 +376,9 @@ class HomeMedico():
                                   text_color="white",
                                   corner_radius=8,          
                                   height=30,
-                                  cursor="hand2")
+                                  cursor="hand2",
+                                  command=lambda: HomeControllerMedicos(self.ventana, self.datos_usuario, "CrearCita")
+                                  )
 
         self.btn_ingresar_1.pack(side="top", fill="x", padx=(15, 15), pady=(0, 15))
 
@@ -400,7 +412,8 @@ class HomeMedico():
                                   text_color="white",
                                   corner_radius=8,          
                                   height=30,
-                                  cursor="hand2")
+                                  cursor="hand2",
+                                  command=lambda: HomeControllerMedicos(self.ventana, self.datos_usuario, "ConsultarCita"))
 
         self.btn_ingresar_2.pack(side="top", fill="x", padx=(15, 15), pady=(0, 15))
 
